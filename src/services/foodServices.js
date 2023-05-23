@@ -47,11 +47,11 @@ export const fetchMealCategories = async () => {
   }
 };
 
-export async function fetchMealsByCategory(category) {
+export const fetchMealsByCategory = async (category) => {
   try {
     const response = await axios.get(`${BASE_URL}/filter.php?c=${category}`);
     return response.data;
   } catch (error) {
     console.log(error);
   }
-}
+};
