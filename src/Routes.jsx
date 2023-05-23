@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
+import Food from './pages/Food';
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={ <Login /> } />
-      {/* <Route path="/foods" element={<Food />} />
-      <Route path="/drinks" element={<Drink />} />
+      <Route path="/foods" element={ <Food /> } />
+      {/* <Route path="/drinks" element={<Drink />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/done-recipes" element={<DoneRecipes />} />
