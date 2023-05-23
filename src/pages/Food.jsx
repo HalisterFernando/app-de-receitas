@@ -1,0 +1,53 @@
+import React, { useContext, useEffect } from 'react';
+import propTypes from 'prop-types';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import { AppContext } from '../context/Provider';
+import { fetchMeals } from '../services/foodServices';
+import RecipeCard from '../components/RecipeCard';
+import SearchBar from '../components/SearchBar';
+// import SearchBar from '../../components/SearchBar';
+// import RecipeCard from '../../components/RecipeCard';
+// import CategoryButtons from '../../components/CategoryButtons';
+
+function Food() {
+  const { meals, setMeals } = useContext(AppContext);
+
+  useEffect(() => {
+    const getMeals = async () => {
+      const data = await fetchMeals();
+      setMeals(data.meals);
+    };
+    getMeals();
+  }, []);
+
+  return (
+    <div className="flex flex-col h-screen">
+      <Header />
+      <SearchBar type="foods" />
+      <div className="h-16 w-full px-2 mt-1">
+        {/* <CategoryButtons /> */}
+      </div>
+      <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
+        {
+          meals.map(({ strMealThumb, strMeal, idMeal }, index) => (
+            <RecipeCard
+              key={ index }
+              index={ index }
+              image={ strMealThumb }
+              name={ strMeal }
+              id={ idMeal }
+            />
+          ))
+        }
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+Food.propTypes = {
+  objectList: propTypes.object,
+}.isRequired;
+
+export default Food;
