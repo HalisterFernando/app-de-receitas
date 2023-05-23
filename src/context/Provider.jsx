@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 export const AppContext = createContext();
 
 function Provider({ children }) {
-  // all drinks and meals
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [toggleSearchBar, setToggleSearchBar] = useState(false);
+  const [categories, setCategories] = useState([]);
   const [currentRecipe, setCurrentRecipe] = useState({ recipe: '', ingredients: '' });
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   const context = useMemo(() => ({
     meals,
@@ -19,7 +20,11 @@ function Provider({ children }) {
     setToggleSearchBar,
     currentRecipe,
     setCurrentRecipe,
-  }), [meals, drinks, toggleSearchBar, currentRecipe]);
+    categories,
+    setCategories,
+    favoriteRecipes,
+    setFavoriteRecipes,
+  }), [meals, drinks, toggleSearchBar, currentRecipe, categories, favoriteRecipes]);
 
   return (
     <div>
