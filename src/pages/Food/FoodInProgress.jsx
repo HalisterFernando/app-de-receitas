@@ -28,6 +28,8 @@ export default function FoodInProgress() {
   const [isFavorite, setIsFavorite] = useState('');
   const { addIngredient, removeIngredient } = useInProgress(id, TYPE);
 
+  const mealsForId = meals[id] || [];
+
   const handleUsedIngredients = ({ target: { checked, value } }) => {
     if (checked) {
       addIngredient(value);
@@ -41,11 +43,7 @@ export default function FoodInProgress() {
     timeOut();
   };
 
-  const handleFinish = () => {
-    if (meals[id]) {
-      return ingredients.length !== meals[id].length;
-    }
-  };
+  const handleFinish = () => ingredients.length !== mealsForId.length;
 
   useEffect(() => {
     setIsFavorite(favoriteRecipes.some((favorite) => favorite.id === id));
@@ -91,15 +89,14 @@ export default function FoodInProgress() {
                 data-testid={ `${idx}-ingredient-step` }
                 htmlFor={ ingredient }
                 key={ ingredient }
-                className={ `${meals[id]
-                  && meals[id].includes(ingredient) ? 'line-through' : ''}` }
+                className={ `${mealsForId.includes(ingredient) ? 'line-through' : ''}` }
               >
                 <input
                   type="checkbox"
                   id={ id }
                   name={ ingredient }
                   value={ ingredient }
-                  checked={ meals[id] && meals[id].includes(ingredient) }
+                  checked={ mealsForId.includes(ingredient) }
                   onChange={ (ev) => handleUsedIngredients(ev) }
                 />
                 {` ${ingredient}`}
