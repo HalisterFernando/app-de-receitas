@@ -7,8 +7,7 @@ import useLoading from '../hooks/useLoading';
 
 const INDEX = 7;
 
-function Recomendations({ type }) {
-  console.log(type);
+export default function Recomendations({ type }) {
   const [recomendation, setRecomendation] = useState([]);
   const { loading } = useLoading();
 
@@ -51,8 +50,6 @@ function Recomendations({ type }) {
     </div>
   );
 }
-
-export default Recomendations;
 
 Recomendations.propTypes = {
   type: propTypes.string.isRequired,
