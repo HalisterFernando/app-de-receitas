@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
+import clipboardCopy from 'clipboard-copy';
 import { Link, useParams } from 'react-router-dom';
-import { copy } from 'clipboard-copy';
 import Share from '../../images/shareIcon.svg';
 import Loading from '../../components/Loading';
 import { AppContext } from '../../context/Provider';
@@ -9,6 +9,8 @@ import useLoading from '../../hooks/useLoading';
 import FavoriteBtn from '../../components/FavoriteBtn';
 import useFavorite from '../../hooks/useFavorite';
 import Recomendations from '../../components/Recomendations';
+import useTimeOut from '../../hooks/useTimeout';
+import Alert from '../../components/Alert';
 
 const TYPE = 'foods';
 
@@ -16,6 +18,7 @@ export default function FoodDetails() {
   const { id } = useParams();
   useRecipeDetails(id, TYPE);
   const { loading } = useLoading();
+  const { show, timeOut } = useTimeOut();
   const { currentRecipe: { recipe, ingredients },
     favoriteRecipes } = useContext(AppContext);
   const { addFavoriteRecipe, removeFavoriteRecipe } = useFavorite(TYPE);
@@ -24,6 +27,11 @@ export default function FoodDetails() {
   useEffect(() => {
     setIsFavorite(favoriteRecipes.some((favorite) => favorite.id === id));
   }, [favoriteRecipes]);
+
+  const handleShare = () => {
+    clipboardCopy(`http://localhost:3000/foods/${id}`);
+    timeOut();
+  };
 
   return (
     <div>
@@ -44,9 +52,7 @@ export default function FoodDetails() {
                 <button
                   data-testid="share-btn"
                   type="button"
-                  onClick={ () => {
-                    copy(`http://localhost:3000/foods/${id}`);
-                  } }
+                  onClick={ () => handleShare() }
                 >
                   <img src={ Share } alt="compartilhar" />
                 </button>
@@ -58,6 +64,7 @@ export default function FoodDetails() {
                 />
               </div>
             </div>
+            {show && <Alert show={ show } />}
             <ul className="bg-orange-400 p-2 m-2 rounded">
               <h3 data-testid="recipe-category">{ recipe.strCategory }</h3>
               {ingredients.map((ingredient, index) => (
