@@ -14,11 +14,14 @@ import Alert from '../../components/Alert';
 import useTimeOut from '../../hooks/useTimeout';
 import useLoading from '../../hooks/useLoading';
 import Loading from '../../components/Loading';
+import useRecipeDetails from '../../hooks/useRecipeDetails';
+import useFinishedRecipes from '../../hooks/useFinishedRecipes';
 
 const TYPE = 'foods';
 
 export default function FoodInProgress() {
   const { id } = useParams();
+  useRecipeDetails(id, TYPE);
   const { loading } = useLoading();
   const { currentRecipe: { recipe, ingredients },
     favoriteRecipes,
@@ -27,6 +30,7 @@ export default function FoodInProgress() {
   const { show, timeOut } = useTimeOut();
   const [isFavorite, setIsFavorite] = useState('');
   const { addIngredient, removeIngredient } = useInProgress(id, TYPE);
+  const { finishRecipe } = useFinishedRecipes(TYPE);
 
   const mealsForId = meals[id] || [];
 
@@ -70,7 +74,6 @@ export default function FoodInProgress() {
             >
               <img src={ ShareIcon } alt="compartilhar" />
             </button>
-
             <FavoriteBtn
               recipe={ recipe }
               add={ addFavoriteRecipe }
@@ -125,6 +128,7 @@ export default function FoodInProgress() {
           `
           }
           disabled={ handleFinish() }
+          onClick={ () => finishRecipe(recipe) }
         >
           Finish Recipe
         </button>
