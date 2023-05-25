@@ -31,10 +31,10 @@ export default function CategoryFilters() {
 
   return !loading && (
     <div className="overflow-x-scroll">
-      <div className="flex min-w-min gap-2">
+      <div className="flex min-w-min gap-2 my-2">
         <button
           type="button"
-          className="bg-orange-400 rounded shadow-md p-1 w-20 text-sm"
+          className="bg-orange-400 rounded shadow-md shadow-black p-1 w-20 text-sm"
           data-testid="All-category-filter"
           onClick={ allCategories }
         >
@@ -47,7 +47,7 @@ export default function CategoryFilters() {
             key={ index }
             onClick={ filterByCategory }
             name={ strCategory }
-            className="bg-orange-400 rounded shadow-md p-1 w-20 text-sm"
+            className="bg-orange-400 rounded shadow-md shadow-black p-1 w-20 text-sm"
           >
             {strCategory}
           </button>
