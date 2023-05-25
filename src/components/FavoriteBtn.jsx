@@ -3,7 +3,9 @@ import propTypes from 'prop-types';
 import Favorite from '../images/blackHeartIcon.svg';
 import NotFavorite from '../images/whiteHeartIcon.svg';
 
-export default function FavoriteBtn({ recipe, isFavorite, add, remove, type }) {
+export default function FavoriteBtn(
+  { recipe, isFavorite, add = () => {}, remove = () => {}, type },
+) {
   return (
     <button
       type="button"
@@ -18,9 +20,9 @@ export default function FavoriteBtn({ recipe, isFavorite, add, remove, type }) {
 }
 
 FavoriteBtn.propTypes = {
-  recipe: propTypes.objectOf(propTypes.any),
-  isFavorite: propTypes.bool,
+  recipe: propTypes.objectOf(propTypes.string).isRequired,
+  isFavorite: propTypes.bool.isRequired,
   add: propTypes.func,
   remove: propTypes.func,
-  type: propTypes.string,
-}.isRequired;
+  type: propTypes.string.isRequired,
+};
