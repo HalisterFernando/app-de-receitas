@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react';
 import Header from '../components/Header';
 import FinishedRecipeCard from '../components/FinishedRecipeCard';
 import { AppContext } from '../context/Provider';
-import DoneRecipesFilter from '../components/DoneRecipesFilter';
+import useFinishedRecipes from '../hooks/useFinishedRecipes';
+import MealAndDrinkFilter from '../components/MealAndDrinkFilter';
 
 export default function DoneRecipes() {
   const { finishedRecipes } = useContext(AppContext);
   const [filter, setFilter] = useState('All');
+  useFinishedRecipes();
 
   const filtersForFinishedRecipes = {
     Food: (arr) => arr.filter(({ type }) => type === 'meal'),
@@ -25,7 +27,7 @@ export default function DoneRecipes() {
   return (
     <div className="h-screen flex flex-col">
       <Header />
-      <DoneRecipesFilter filter={ setFilter } />
+      <MealAndDrinkFilter filter={ setFilter } />
       <div className="flex flex-col gap-4 items-center mt-2 overflow-y-scroll">
         {recipesToRender().map((recipe, index) => (
           <FinishedRecipeCard
@@ -34,7 +36,7 @@ export default function DoneRecipes() {
             image={ recipe.image }
             category={ recipe.category }
             nationality={ recipe.nationality }
-            tags={ recipe.tags.split(',') }
+            tags={ recipe.tags && recipe.tags.split(',') }
             alcoholic={ recipe.alcoholicOrNot }
             type={ recipe.type }
             index={ index }
