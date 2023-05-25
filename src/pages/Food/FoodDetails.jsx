@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import clipboardCopy from 'clipboard-copy';
 import { Link, useParams } from 'react-router-dom';
-import Share from '../../images/shareIcon.svg';
 import Loading from '../../components/Loading';
 import { AppContext } from '../../context/Provider';
 import useRecipeDetails from '../../hooks/useRecipeDetails';
@@ -11,17 +10,20 @@ import useFavorite from '../../hooks/useFavorite';
 import Recomendations from '../../components/Recomendations';
 import useTimeOut from '../../hooks/useTimeout';
 import Alert from '../../components/Alert';
+import ShareBtn from '../../components/ShareBtn';
+import useFinishedRecipes from '../../hooks/useFinishedRecipes';
 
 const TYPE = 'foods';
 
 export default function FoodDetails() {
   const { id } = useParams();
   useRecipeDetails(id, TYPE);
+  useFinishedRecipes();
   const { loading } = useLoading();
   const { show, timeOut } = useTimeOut();
   const { currentRecipe: { recipe, ingredients },
-    favoriteRecipes } = useContext(AppContext);
-  const { addFavoriteRecipe, removeFavoriteRecipe } = useFavorite(TYPE);
+    favoriteRecipes, finishedRecipes } = useContext(AppContext);
+  const { addFavoriteRecipe, removeFavoriteRecipe } = useFavorite();
   const [isFavorite, setIsFavorite] = useState('');
 
   useEffect(() => {
@@ -32,6 +34,9 @@ export default function FoodDetails() {
     clipboardCopy(`http://localhost:3000/foods/${id}`);
     timeOut();
   };
+
+  const isRecipeFinished = () => finishedRecipes
+    .some((finishedRecipe) => finishedRecipe.id === id);
 
   return (
     <div>
@@ -48,19 +53,13 @@ export default function FoodDetails() {
 
               <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
               <div className="flex gap-3">
-
-                <button
-                  data-testid="share-btn"
-                  type="button"
-                  onClick={ () => handleShare() }
-                >
-                  <img src={ Share } alt="compartilhar" />
-                </button>
+                <ShareBtn handleShare={ handleShare } />
                 <FavoriteBtn
                   recipe={ recipe }
                   add={ addFavoriteRecipe }
                   remove={ removeFavoriteRecipe }
                   isFavorite={ isFavorite }
+                  type={ TYPE }
                 />
               </div>
             </div>
@@ -96,7 +95,14 @@ export default function FoodDetails() {
               to={ `/foods/${id}/in-progress` }
             >
               <button
-                className="mx-auto block bg-orange-400 p-1 rounded my-4"
+                className={
+                  `${isRecipeFinished() ? 'hidden' : 'block'} 
+                  mx-auto 
+                  bg-orange-400 
+                  p-1 
+                  rounded 
+                  my-4`
+                }
                 type="button"
                 data-testid="start-recipe-btn"
               >

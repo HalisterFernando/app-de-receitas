@@ -1,12 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import Alert from '../../components/Alert';
 import clipboardCopy from 'clipboard-copy';
 import { useParams } from 'react-router-dom';
 import useFavorite from '../../hooks/useFavorite';
-// import useIngredients from '../../context/hooks/useIngredients';
-// import useLocalStorage from '../../context/hooks/useLocalStorage';
-// import useTimeOut from '../../context/hooks/useTimeOut';
-import ShareIcon from '../../images/shareIcon.svg';
 import { AppContext } from '../../context/Provider';
 import FavoriteBtn from '../../components/FavoriteBtn';
 import useInProgress from '../../hooks/useInProgress';
@@ -16,6 +11,7 @@ import useLoading from '../../hooks/useLoading';
 import Loading from '../../components/Loading';
 import useRecipeDetails from '../../hooks/useRecipeDetails';
 import useFinishedRecipes from '../../hooks/useFinishedRecipes';
+import ShareBtn from '../../components/ShareBtn';
 
 const TYPE = 'foods';
 
@@ -67,13 +63,7 @@ export default function FoodInProgress() {
         <div className="flex items-center justify-between p-2">
           <h4 data-testid="recipe-title">{recipe.strMeal}</h4>
           <div className="flex gap-3">
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ () => handleShare() }
-            >
-              <img src={ ShareIcon } alt="compartilhar" />
-            </button>
+            <ShareBtn handleShare={ handleShare } />
             <FavoriteBtn
               recipe={ recipe }
               add={ addFavoriteRecipe }

@@ -2,15 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 import propTypes from 'prop-types';
-import ShareIcon from '../images/shareIcon.svg';
+import clipboardCopy from 'clipboard-copy';
 import Tag from './Tag';
+import ShareBtn from './ShareBtn';
+import useTimeOut from '../hooks/useTimeout';
+import Alert from './Alert';
 
 export default function FinishedRecipeCard(
-  { id, name, image, category, nationality, tags = [], alcoholic = '', type, index },
+  { id, name, image, category, nationality, tags = null, alcoholic = '', type, index },
 
 ) {
   const linkTo = type === 'meal' ? `/foods/${id}` : `/drinks/${id}`;
   const currentDate = format(new Date(), 'dd/MM/yyyy');
+
+  const { show, timeOut } = useTimeOut();
+
+  const handleShare = () => {
+    clipboardCopy(`http://localhost:3000${linkTo}`);
+    timeOut();
+  };
 
   return (
     <div
@@ -36,7 +46,7 @@ export default function FinishedRecipeCard(
         </Link>
       </div>
       <div className="flex flex-col justify-between p-2 h-full w-1/2">
-        <div className="flex items-center justify-between text-sm">
+        <div className="flex items-center justify-between text-xs">
           {alcoholic
             ? (<span data-testid={ `${index}-horizontal-top-text` }>{alcoholic}</span>)
             : (
@@ -44,16 +54,11 @@ export default function FinishedRecipeCard(
                 {`${nationality} - ${category}` }
               </span>
             )}
-          <button>
-            <img
-              src={ ShareIcon }
-              alt="compartilhar"
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </button>
+          <ShareBtn handleShare={ handleShare } />
         </div>
         <Link to={ linkTo }>
           <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
+          {show && <Alert show={ show } />}
         </Link>
         <span
           className="text-xs"
@@ -62,8 +67,8 @@ export default function FinishedRecipeCard(
           {`Done in: ${currentDate}`}
         </span>
         <div className="flex gap-2">
-          {tags.length > 0 && tags.map((tagName) => (
-            <div key={ tagName }>
+          {tags && tags.map((tagName) => (
+            <div key={ index }>
               <Tag name={ tagName } index={ index } />
             </div>
           ))}
