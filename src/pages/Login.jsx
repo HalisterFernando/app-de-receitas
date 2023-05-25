@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginBG from '../assets/login.jpg';
 import validateLogin from '../services/loginServices';
 import { setItem } from '../services/localStorageServices';
+import { AppContext } from '../context/Provider';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setUserEmail } = useContext(AppContext);
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -20,7 +22,7 @@ export default function Login() {
     setItem('mealsToken', {});
     setItem('cocktailsToken', {});
     setItem('user', email);
-
+    setUserEmail(email);
     navigate('/foods');
   };
 
