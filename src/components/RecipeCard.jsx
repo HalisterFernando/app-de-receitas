@@ -12,10 +12,9 @@ export default function RecipeCard({ index, image, name, id }) {
       w-72
       min-h-44
       mb-5
-      border
-      border-orange-400
       rounded
-      shadow-xl
+      shadow-md
+      shadow-black
       flex
       flex-col
       justify-between
@@ -27,7 +26,7 @@ export default function RecipeCard({ index, image, name, id }) {
             data-testid={ `${index}-card-img` }
             src={ image }
             alt={ name }
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover rounded-t"
           />
         </div>
         <div className="ml-2 mb-1 h-8 flex items-center">
