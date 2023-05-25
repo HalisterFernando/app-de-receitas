@@ -23,7 +23,7 @@ export default function FoodDetails() {
   const { show, timeOut } = useTimeOut();
   const { currentRecipe: { recipe, ingredients },
     favoriteRecipes, finishedRecipes } = useContext(AppContext);
-  const { addFavoriteRecipe, removeFavoriteRecipe } = useFavorite();
+  const { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite } = useFavorite();
   const [isFavorite, setIsFavorite] = useState('');
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function FoodDetails() {
               <div className="flex gap-3">
                 <ShareBtn handleShare={ handleShare } />
                 <FavoriteBtn
-                  recipe={ recipe }
+                  recipe={ recipeToFavorite(recipe, TYPE) }
                   add={ addFavoriteRecipe }
                   remove={ removeFavoriteRecipe }
                   isFavorite={ isFavorite }
