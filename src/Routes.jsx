@@ -3,6 +3,7 @@ import Login from './pages/Login';
 import Food from './pages/Food/Food';
 import FoodDetails from './pages/Food/FoodDetails';
 import FoodInProgress from './pages/Food/FoodInProgress';
+import DoneRecipes from './pages/DoneRecipes';
 
 export default function AppRoutes() {
   return (
@@ -11,10 +12,10 @@ export default function AppRoutes() {
       <Route path="/foods" element={ <Food /> } />
       <Route path="/foods/:id" element={ <FoodDetails /> } />
       <Route path="/foods/:id/in-progress" element={ <FoodInProgress /> } />
+      <Route path="/done-recipes" element={ <DoneRecipes /> } />
       {/* <Route path="/drinks" element={<Drink />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/done-recipes" element={<DoneRecipes />} />
       <Route path="/favorite-recipes" element={<FavoriteRecipes />} />
       <Route path="/drinks/:id" element={<DrinkDetails />} />
       <Route path="/drinks/:id/in-progress" element={<DrinkProgress />} />
