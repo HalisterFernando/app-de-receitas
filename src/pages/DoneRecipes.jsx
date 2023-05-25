@@ -18,9 +18,7 @@ export default function DoneRecipes() {
 
   const recipesToRender = () => {
     const recipes = [...finishedRecipes];
-
     const filteredValues = filtersForFinishedRecipes[filter](recipes);
-
     return filteredValues;
   };
 
@@ -28,7 +26,7 @@ export default function DoneRecipes() {
     <div className="h-screen flex flex-col">
       <Header />
       <MealAndDrinkFilter filter={ setFilter } />
-      <div className="flex flex-col gap-4 items-center mt-2 overflow-y-scroll">
+      <div className="flex flex-col gap-4 items-center h-full mt-2 overflow-y-scroll">
         {recipesToRender().map((recipe, index) => (
           <FinishedRecipeCard
             id={ recipe.id }
