@@ -42,22 +42,18 @@ export default function useFavorite() {
     };
   };
 
-  const addFavoriteRecipe = (recipe, type) => {
-    const favorite = recipeToFavorite(recipe, type);
-    const updatedFavorites = [...favoriteRecipes, favorite];
+  const addFavoriteRecipe = (recipe) => {
+    const updatedFavorites = [...favoriteRecipes, recipe];
     setFavoriteRecipes(updatedFavorites);
     setItem('favoriteRecipes', updatedFavorites);
   };
 
-  const removeFavoriteRecipe = (recipe, type) => {
+  const removeFavoriteRecipe = (recipe) => {
     const updatedFavorites = [...favoriteRecipes]
-      .filter((favorite) => (
-        type === 'foods'
-          ? favorite.name !== recipe.strMeal
-          : favorite.name !== recipe.strDrink));
+      .filter((favorite) => favorite.name !== recipe.name);
     setFavoriteRecipes(updatedFavorites);
     setItem('favoriteRecipes', updatedFavorites);
   };
 
-  return { addFavoriteRecipe, removeFavoriteRecipe };
+  return { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite };
 }
