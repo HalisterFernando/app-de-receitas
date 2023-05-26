@@ -10,6 +10,8 @@ import CategoryFilters from '../../components/CategoryFilters';
 import useLoading from '../../hooks/useLoading';
 import { fetchDrinks } from '../../services/drinkServices';
 
+const INDEX = 12;
+
 export default function Drink() {
   const { drinks, setDrinks } = useContext(AppContext);
   const { loading } = useLoading();
@@ -33,17 +35,15 @@ export default function Drink() {
       </div>
       {loading ? <Loading /> : (
         <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
-          {
-            drinks.map(({ strDrinkThumb, strDrink, idDrink }, index) => (
-              <RecipeCard
-                key={ index }
-                index={ index }
-                image={ strDrinkThumb }
-                name={ strDrink }
-                id={ idDrink }
-              />
-            ))
-          }
+          {drinks.slice(0, INDEX).map(({ strDrinkThumb, strDrink, idDrink }, index) => (
+            <RecipeCard
+              key={ index }
+              index={ index }
+              image={ strDrinkThumb }
+              name={ strDrink }
+              id={ idDrink }
+            />
+          ))}
         </div>
       )}
       <Footer />

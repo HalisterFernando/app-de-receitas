@@ -4,29 +4,51 @@ import {
   fetchMeals, fetchMealCategories, fetchMealsByCategory,
 } from '../services/foodServices';
 import useLoading from '../hooks/useLoading';
+import { fetchDrinkCategories, fetchDrinks, fetchDrinksByCategory } from '../services/drinkServices';
 
 const INDEX = 5;
 
 export default function CategoryFilters() {
-  const { categories, setCategories, setMeals } = useContext(AppContext);
+  const { categories, setCategories, setMeals, setDrinks } = useContext(AppContext);
   const { loading } = useLoading();
-
+  const isFoodsUrl = window.location.href.includes('/foods');
   useEffect(() => {
-    const getCategories = async () => {
-      const data = await fetchMealCategories();
-      setCategories(data.meals);
+    const getMealCategories = async () => {
+      const { meals } = await fetchMealCategories();
+      setCategories(meals);
     };
-    getCategories();
+
+    const getDrinkCategories = async () => {
+      const { drinks } = await fetchDrinkCategories();
+
+      setCategories(drinks);
+    };
+
+    if (isFoodsUrl) {
+      getMealCategories();
+    } else {
+      getDrinkCategories();
+    }
   }, []);
 
   const allCategories = async () => {
-    const data = await fetchMeals();
-    setMeals(data.meals);
+    if (isFoodsUrl) {
+      const { meals } = await fetchMeals();
+      setMeals(meals);
+    } else {
+      const { drinks } = await fetchDrinks();
+      setDrinks(drinks);
+    }
   };
 
   const filterByCategory = async ({ target: { name } }) => {
-    const data = await fetchMealsByCategory(name);
-    setMeals(data.meals);
+    if (isFoodsUrl) {
+      const { meals } = await fetchMealsByCategory(name);
+      setMeals(meals);
+    } else {
+      const { drinks } = await fetchDrinksByCategory(name);
+      setDrinks(drinks);
+    }
   };
 
   return !loading && (
@@ -47,7 +69,7 @@ export default function CategoryFilters() {
             key={ index }
             onClick={ filterByCategory }
             name={ strCategory }
-            className="bg-orange-400 rounded shadow-md shadow-black p-1 w-20 text-sm"
+            className="bg-orange-400 rounded shadow-md shadow-black p-1 w-24 text-xs"
           >
             {strCategory}
           </button>
