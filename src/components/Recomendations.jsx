@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { fetchDrinks } from '../services/drinkServices';
 import { fetchMeals } from '../services/foodServices';
-import RecipeCard from './RecipeCard';
+import RecipeCard from './Cards/RecipeCard';
 import useLoading from '../hooks/useLoading';
 
 const INDEX = 7;
