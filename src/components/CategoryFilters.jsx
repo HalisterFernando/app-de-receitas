@@ -30,7 +30,7 @@ export default function CategoryFilters() {
   };
 
   return !loading && (
-    <div className="overflow-x-scroll">
+    <div className="overflow-x-scroll px-1">
       <div className="flex min-w-min gap-2 my-2">
         <button
           type="button"
