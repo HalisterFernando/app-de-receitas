@@ -6,9 +6,6 @@ import { AppContext } from '../../context/Provider';
 import { fetchMeals } from '../../services/foodServices';
 import RecipeCard from '../../components/Cards/RecipeCard';
 import SearchBar from '../../components/SearchBar';
-// import SearchBar from '../../components/SearchBar';
-// import RecipeCard from '../../components/RecipeCard';
-// import CategoryButtons from '../../components/CategoryButtons';
 import Loading from '../../components/Loading';
 import CategoryFilters from '../../components/CategoryFilters';
 import useLoading from '../../hooks/useLoading';
@@ -16,12 +13,15 @@ import useLoading from '../../hooks/useLoading';
 export default function Food() {
   const { meals, setMeals } = useContext(AppContext);
   const { loading } = useLoading();
+
   useEffect(() => {
     const getMeals = async () => {
       const data = await fetchMeals();
       setMeals(data.meals);
     };
-    getMeals();
+    if (meals.length === 0) {
+      getMeals();
+    }
   }, []);
 
   return (
