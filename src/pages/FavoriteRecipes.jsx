@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import MealAndDrinkFilter from '../components/MealAndDrinkFilter';
 import { AppContext } from '../context/Provider';
 import useFavorite from '../hooks/useFavorite';
-import FavoriteRecipeCard from '../components/FavoriteRecipeCard';
+import FavoriteRecipeCard from '../components/Cards/FavoriteRecipeCard';
 
 export default function FavoriteRecipes() {
   const { favoriteRecipes } = useContext(AppContext);

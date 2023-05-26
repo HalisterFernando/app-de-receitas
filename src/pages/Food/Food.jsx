@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { AppContext } from '../../context/Provider';
 import { fetchMeals } from '../../services/foodServices';
-import RecipeCard from '../../components/RecipeCard';
+import RecipeCard from '../../components/Cards/RecipeCard';
 import SearchBar from '../../components/SearchBar';
 // import SearchBar from '../../components/SearchBar';
 // import RecipeCard from '../../components/RecipeCard';

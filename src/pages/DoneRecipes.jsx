@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Header from '../components/Header';
-import FinishedRecipeCard from '../components/FinishedRecipeCard';
+import FinishedRecipeCard from '../components/Cards/FinishedRecipeCard';
 import { AppContext } from '../context/Provider';
 import useFinishedRecipes from '../hooks/useFinishedRecipes';
 import MealAndDrinkFilter from '../components/MealAndDrinkFilter';
