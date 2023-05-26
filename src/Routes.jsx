@@ -9,6 +9,8 @@ import ExploreFoods from './pages/Explore/ExploreFoods';
 import ExploreDrinks from './pages/Explore/ExploreDrinks';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Profile from './pages/Profile';
+import ExploreFoodIngredients from './pages/Explore/ExploreFoodIngredients';
+import ExploreFoodNationality from './pages/Explore/ExploreFoodNationality';
 
 export default function AppRoutes() {
   return (
@@ -23,12 +25,12 @@ export default function AppRoutes() {
       <Route path="/explore/drinks" element={ <ExploreDrinks /> } />
       <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
       <Route path="/profile" element={ <Profile /> } />
+      <Route path="/explore/foods/ingredients" element={ <ExploreFoodIngredients /> } />
+      <Route path="/explore/foods/nationalities" element={ <ExploreFoodNationality /> } />
       {/* <Route path="/drinks" element={<Drink />} />
       <Route path="/drinks/:id" element={<DrinkDetails />} />
       <Route path="/drinks/:id/in-progress" element={<DrinkProgress />} />
-      <Route path="/explore/foods/ingredients" element={<FoodIngredients />} />
       <Route path="/explore/drinks/ingredients" element={<DrinkIngredients />} />
-      <Route path="/explore/foods/nationalities" element={<FoodNationalities />} />
       <Route path="*" element={<NotFound />} /> */}
     </Routes>
   );
