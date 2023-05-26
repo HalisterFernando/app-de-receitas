@@ -42,8 +42,8 @@ export const fetchMealCategories = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/list.php?c=list`);
     return response.data;
-  } catch (error) {
-    return error;
+  } catch (err) {
+    return err;
   }
 };
 
@@ -51,7 +51,34 @@ export const fetchMealsByCategory = async (category) => {
   try {
     const response = await axios.get(`${BASE_URL}/filter.php?c=${category}`);
     return response.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchRandomMeal = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/random.php`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchMealIngredients = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}//list.php?i=list`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const fetchMealByIngredient = async (ingredient) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/filter.php?i=${ingredient}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
   }
 };
