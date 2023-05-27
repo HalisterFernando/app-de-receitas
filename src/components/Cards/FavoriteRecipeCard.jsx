@@ -8,7 +8,8 @@ import Alert from '../Alert';
 import FavoriteBtn from '../FavoriteBtn';
 
 export default function FavoriteRecipeCard(
-  { id, name, image, category, nationality, alcoholic = null, type, index, remove },
+  { id, name, image, category, nationality = null,
+    alcoholic = null, type, index, remove },
 
 ) {
   const linkTo = type === 'meal' ? `/foods/${id}` : `/drinks/${id}`;
@@ -75,7 +76,7 @@ FavoriteRecipeCard.propTypes = {
   name: propTypes.string.isRequired,
   image: propTypes.string.isRequired,
   category: propTypes.string.isRequired,
-  nationality: propTypes.string.isRequired,
+  nationality: propTypes.string,
   alcoholic: propTypes.string,
   type: propTypes.string.isRequired,
   index: propTypes.number.isRequired,
