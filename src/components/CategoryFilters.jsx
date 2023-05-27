@@ -4,7 +4,8 @@ import {
   fetchMeals, fetchMealCategories, fetchMealsByCategory,
 } from '../services/foodServices';
 import useLoading from '../hooks/useLoading';
-import { fetchDrinkCategories, fetchDrinks, fetchDrinksByCategory } from '../services/drinkServices';
+import { fetchDrinkCategories, fetchDrinks,
+  fetchDrinksByCategory } from '../services/drinkServices';
 
 const INDEX = 5;
 
@@ -12,6 +13,7 @@ export default function CategoryFilters() {
   const { categories, setCategories, setMeals, setDrinks } = useContext(AppContext);
   const { loading } = useLoading();
   const isFoodsUrl = window.location.href.includes('/foods');
+
   useEffect(() => {
     const getMealCategories = async () => {
       const { meals } = await fetchMealCategories();
@@ -20,7 +22,6 @@ export default function CategoryFilters() {
 
     const getDrinkCategories = async () => {
       const { drinks } = await fetchDrinkCategories();
-
       setCategories(drinks);
     };
 
