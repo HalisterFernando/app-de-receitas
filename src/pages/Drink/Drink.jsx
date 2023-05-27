@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import propTypes from 'prop-types';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { AppContext } from '../../context/Provider';
@@ -11,6 +10,7 @@ import useLoading from '../../hooks/useLoading';
 import { fetchDrinks } from '../../services/drinkServices';
 
 const INDEX = 12;
+const TYPE = 'drinks';
 
 export default function Drink() {
   const { drinks, setDrinks } = useContext(AppContext);
@@ -29,9 +29,9 @@ export default function Drink() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      <SearchBar type="drinks" />
+      <SearchBar type={ TYPE } />
       <div className="h-16 w-full px-2 mt-1">
-        <CategoryFilters />
+        <CategoryFilters type={ TYPE } />
       </div>
       {loading ? <Loading /> : (
         <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
@@ -50,7 +50,3 @@ export default function Drink() {
     </div>
   );
 }
-
-Drink.propTypes = {
-  objectList: propTypes.object,
-}.isRequired;
