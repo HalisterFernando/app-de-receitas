@@ -44,7 +44,8 @@ export default function useRecipeDetails(id, type) {
       .map((value) => value[1]);
 
     const ingredientsAndMeasurements = ingredientsFromRecipe
-      .map((ingredient, index) => `${ingredient} - ${measurementsFromRecipe[index]}`);
+      .map((ingredient, index) => `${ingredient} ${measurementsFromRecipe[index]
+        ? `- ${measurementsFromRecipe[index]}` : ''}`);
 
     return setIngredients(ingredientsAndMeasurements);
   };
