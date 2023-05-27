@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-// import { fetchCocktailById } from '../services/drinkServices';
 import { fetchMealById } from '../services/foodServices';
 import { AppContext } from '../context/Provider';
+import { fetchDrinkById } from '../services/drinkServices';
 
 export default function useRecipeDetails(id, type) {
   const { setCurrentRecipe } = useContext(AppContext);
@@ -19,7 +19,7 @@ export default function useRecipeDetails(id, type) {
     };
 
     const getDrinkById = async () => {
-      const { drinks: [drink] } = await fetchCocktailById(id);
+      const { drinks: [drink] } = await fetchDrinkById(id);
       setRecipe(drink);
     };
 
@@ -31,7 +31,7 @@ export default function useRecipeDetails(id, type) {
   }, []);
 
   const getIngredients = () => {
-    const checkValue = (value) => value.trim().length > 0;
+    const checkValue = (value) => value && value.trim().length > 0;
 
     const ingredientsFromRecipe = Object
       .entries(recipe)
