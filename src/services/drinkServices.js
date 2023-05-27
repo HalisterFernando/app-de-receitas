@@ -37,3 +37,30 @@ export async function fetchDrinkById(id) {
     console.log(err);
   }
 }
+
+export async function fetchDrinkIngredients() {
+  try {
+    const response = await axios.get(`${BASE_URL}/list.php?i=list`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function fetchRandomDrink() {
+  try {
+    const response = await axios.get(`${BASE_URL}/random.php`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function fetchDrinkByIngredient(ingredient) {
+  try {
+    const response = await axios.get(`${BASE_URL}/filter.php?i=${ingredient}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
