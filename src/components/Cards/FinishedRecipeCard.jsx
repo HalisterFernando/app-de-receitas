@@ -9,7 +9,8 @@ import useTimeOut from '../../hooks/useTimeout';
 import Alert from '../Alert';
 
 export default function FinishedRecipeCard(
-  { id, name, image, category, nationality, tags = null, alcoholic = '', type, index },
+  { id, name, image, category, nationality = null,
+    tags = null, alcoholic = '', type, index },
 
 ) {
   const linkTo = type === 'meal' ? `/foods/${id}` : `/drinks/${id}`;
@@ -68,7 +69,7 @@ export default function FinishedRecipeCard(
         </span>
         <div className="flex gap-2">
           {tags && tags.map((tagName) => (
-            <div key={ index }>
+            <div key={ id }>
               <Tag name={ tagName } index={ index } />
             </div>
           ))}
@@ -83,7 +84,7 @@ FinishedRecipeCard.propTypes = {
   name: propTypes.string.isRequired,
   image: propTypes.string.isRequired,
   category: propTypes.string.isRequired,
-  nationality: propTypes.string.isRequired,
+  nationality: propTypes.string,
   tags: propTypes.arrayOf(propTypes.string),
   alcoholic: propTypes.string,
   type: propTypes.string.isRequired,
