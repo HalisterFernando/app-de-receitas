@@ -11,6 +11,11 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import Profile from './pages/Profile';
 import ExploreFoodIngredients from './pages/Explore/ExploreFoodIngredients';
 import ExploreFoodNationality from './pages/Explore/ExploreFoodNationality';
+import NotFound from './pages/NotFound';
+import Drink from './pages/Drink/Drink';
+import DrinkDetails from './pages/Drink/DrinkDetails';
+import DrinkInProgress from './pages/Drink/DrinkInProgress';
+import ExploreDrinkIngredients from './pages/Explore/ExploreDrinkIngredients';
 
 export default function AppRoutes() {
   return (
@@ -27,11 +32,11 @@ export default function AppRoutes() {
       <Route path="/profile" element={ <Profile /> } />
       <Route path="/explore/foods/ingredients" element={ <ExploreFoodIngredients /> } />
       <Route path="/explore/foods/nationalities" element={ <ExploreFoodNationality /> } />
-      {/* <Route path="/drinks" element={<Drink />} />
-      <Route path="/drinks/:id" element={<DrinkDetails />} />
-      <Route path="/drinks/:id/in-progress" element={<DrinkProgress />} />
-      <Route path="/explore/drinks/ingredients" element={<DrinkIngredients />} />
-      <Route path="*" element={<NotFound />} /> */}
+      <Route path="*" element={ <NotFound /> } />
+      <Route path="/drinks" element={ <Drink /> } />
+      <Route path="/drinks/:id" element={ <DrinkDetails /> } />
+      <Route path="/drinks/:id/in-progress" element={ <DrinkInProgress /> } />
+      <Route path="/explore/drinks/ingredients" element={ <ExploreDrinkIngredients /> } />
     </Routes>
   );
 }
