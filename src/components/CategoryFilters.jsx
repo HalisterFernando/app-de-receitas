@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import propTypes from 'prop-types';
 import { AppContext } from '../context/Provider';
 import {
   fetchMeals, fetchMealCategories, fetchMealsByCategory,
@@ -9,10 +10,11 @@ import { fetchDrinkCategories, fetchDrinks,
 
 const INDEX = 5;
 
-export default function CategoryFilters() {
+export default function CategoryFilters({ type }) {
   const { categories, setCategories, setMeals, setDrinks } = useContext(AppContext);
   const { loading } = useLoading();
-  const isFoodsUrl = window.location.href.includes('/foods');
+
+  const isTypeFoods = type === 'foods';
 
   useEffect(() => {
     const getMealCategories = async () => {
@@ -25,7 +27,7 @@ export default function CategoryFilters() {
       setCategories(drinks);
     };
 
-    if (isFoodsUrl) {
+    if (isTypeFoods) {
       getMealCategories();
     } else {
       getDrinkCategories();
@@ -33,7 +35,7 @@ export default function CategoryFilters() {
   }, []);
 
   const allCategories = async () => {
-    if (isFoodsUrl) {
+    if (isTypeFoods) {
       const { meals } = await fetchMeals();
       setMeals(meals);
     } else {
@@ -43,7 +45,7 @@ export default function CategoryFilters() {
   };
 
   const filterByCategory = async ({ target: { name } }) => {
-    if (isFoodsUrl) {
+    if (isTypeFoods) {
       const { meals } = await fetchMealsByCategory(name);
       setMeals(meals);
     } else {
@@ -79,3 +81,7 @@ export default function CategoryFilters() {
     </div>
   );
 }
+
+CategoryFilters.propTypes = {
+  type: propTypes.string.isRequired,
+};
