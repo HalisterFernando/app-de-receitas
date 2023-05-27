@@ -29,7 +29,7 @@ export default function Drink() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      <SearchBar type="foods" />
+      <SearchBar type="drinks" />
       <div className="h-16 w-full px-2 mt-1">
         <CategoryFilters />
       </div>
