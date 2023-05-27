@@ -3,17 +3,22 @@ import propTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/Provider';
 import { fetchMealByIngredient } from '../../services/foodServices';
+import { fetchDrinkByIngredient } from '../../services/drinkServices';
 
 export default function IngredientCard({ name, image, index }) {
-  const { setMeals } = useContext(AppContext);
-  const url = window.location.href.includes('foods');
+  const { setMeals, setDrinks } = useContext(AppContext);
+  const isFoodsUrl = window.location.href.includes('foods');
   const navigate = useNavigate();
 
   const navigateTo = async () => {
-    if (url) {
+    if (isFoodsUrl) {
       const { meals } = await fetchMealByIngredient(name);
       setMeals(meals);
       navigate('/foods');
+    } else {
+      const { drinks } = await fetchDrinkByIngredient(name);
+      setDrinks(drinks);
+      navigate('/drinks');
     }
   };
 
