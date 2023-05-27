@@ -22,6 +22,7 @@ export default function Profile() {
 
     localStorageKeys.forEach((key) => removeItem(key));
     navigate('/');
+    window.location.reload();
   };
 
   return (
