@@ -10,6 +10,9 @@ import Loading from '../../components/Loading';
 import CategoryFilters from '../../components/CategoryFilters';
 import useLoading from '../../hooks/useLoading';
 
+const TYPE = 'foods';
+const INDEX = 12;
+
 export default function Food() {
   const { meals, setMeals } = useContext(AppContext);
   const { loading } = useLoading();
@@ -27,27 +30,23 @@ export default function Food() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      <SearchBar type="foods" />
+      <SearchBar type={ TYPE } />
       <div className="h-16 w-full px-2 mt-1">
-        <CategoryFilters />
+        <CategoryFilters type={ TYPE } />
       </div>
-      {
-        loading ? <Loading /> : (
-          <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
-            {
-              meals.map(({ strMealThumb, strMeal, idMeal }, index) => (
-                <RecipeCard
-                  key={ index }
-                  index={ index }
-                  image={ strMealThumb }
-                  name={ strMeal }
-                  id={ idMeal }
-                />
-              ))
-            }
-          </div>
-        )
-      }
+      {loading ? <Loading /> : (
+        <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
+          {meals.slice(0, INDEX).map(({ strMealThumb, strMeal, idMeal }, index) => (
+            <RecipeCard
+              key={ index }
+              index={ index }
+              image={ strMealThumb }
+              name={ strMeal }
+              id={ idMeal }
+            />
+          ))}
+        </div>
+      )}
       <Footer />
     </div>
   );
