@@ -22,7 +22,7 @@ export default function FoodInProgress() {
   const { currentRecipe: { recipe, ingredients },
     favoriteRecipes,
     inProgressRecipes: { meals } } = useContext(AppContext);
-  const { addFavoriteRecipe, removeFavoriteRecipe } = useFavorite(TYPE);
+  const { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite } = useFavorite(TYPE);
   const { show, timeOut } = useTimeOut();
   const [isFavorite, setIsFavorite] = useState('');
   const { addIngredient, removeIngredient } = useInProgress(id, TYPE);
@@ -65,7 +65,7 @@ export default function FoodInProgress() {
           <div className="flex gap-3">
             <ShareBtn handleShare={ handleShare } />
             <FavoriteBtn
-              recipe={ recipe }
+              recipe={ recipeToFavorite(recipe, TYPE) }
               add={ addFavoriteRecipe }
               remove={ removeFavoriteRecipe }
               isFavorite={ isFavorite }
