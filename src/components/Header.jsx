@@ -28,7 +28,7 @@ export default function Header() {
   const navigate = useNavigate();
 
   const renderSearchIcon = (path) => {
-    const paths = ['/foods', '/nationality', '/drinks', '/explore/foods/nationalities'];
+    const paths = ['/foods', '/nationality', '/drinks'];
 
     return (
       paths.includes(path) ? (
