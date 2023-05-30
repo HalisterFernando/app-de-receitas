@@ -1,103 +1,135 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import LoginBG from '../assets/login.jpg';
-import validateLogin from '../services/loginServices';
-import { setItem } from '../services/localStorageServices';
-import { AppContext } from '../context/Provider';
+import React from 'react';
+import useLogin from '../hooks/useLogin';
+import Logo from '../assets/logo.png';
+import Check from '../assets/check.png';
 
 export default function Login() {
-  const navigate = useNavigate();
-  const { setUserEmail } = useContext(AppContext);
-  const [login, setLogin] = useState({
-    email: '',
-    password: '',
-  });
-
-  const [disable, setDisable] = useState(true);
-
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-    const { email } = login;
-
-    setItem('mealsToken', {});
-    setItem('cocktailsToken', {});
-    setItem('user', email);
-    setUserEmail(email);
-    navigate('/foods');
-  };
-
-  const handleChange = ({ target: { name, value } }) => {
-    setLogin({ ...login, [name]: value });
-  };
-
-  useEffect(() => {
-    const { email, password } = login;
-    const isLoginValid = validateLogin(email, password);
-
-    setDisable(isLoginValid);
-  }, [login]);
+  const { handleChange, handleSubmit, disable, login: { email, password },
+    validEmail, validPassword } = useLogin();
 
   return (
-    <form
-      className="h-screen flex items-center justify-center bg-cover"
-      style={ { backgroundImage: `url(${LoginBG})` } }
-      onSubmit={ handleSubmit }
+    <div
+      className="
+      h-screen
+      flex
+      flex-col
+      items-center
+      justify-center
+      bg-gradient-to-t from-orange-200"
     >
-      <div
+      <div className="h-80 w-80 animate-slide-down">
+        <img className="h-full w-full object-" src={ Logo } alt="" />
+      </div>
+      <form
+        onSubmit={ handleSubmit }
         className="
         w-72
-        h-72
-        p-5
-        bg-slate-50
-        bg-opacity-90
-        rounded
-        shadow-lg
+        h-56
         flex
         flex-col
         items-center
-        justify-center
-        gap-4
+        justify-evenly
+        gap-1
+        animate-slide-up
       "
       >
-        <h2 className="mb-5">Bem-vindo ao Du Cheff</h2>
-        <label htmlFor="email" className="flex flex-col justify-center items-center">
+        <label htmlFor="email" className="flex justify-center items-center relative">
           <input
-            className="border-2 border-orange-400 w-[95%] rounded px-2 py-1"
+            className="border-2 border-orange-400 w-[95%] rounded-full p-3"
             id="email"
             name="email"
             type="text"
-            value={ login.email }
-            onChange={ (ev) => handleChange(ev) }
+            value={ email }
+            onChange={ handleChange }
             placeholder="E-mail"
             data-testid="email-input"
           />
+          <img
+            className={ `
+          h-5
+          w-5
+          absolute
+          right-0
+          border-2
+          border-orange-400
+          rounded-full          
+          ${validEmail ? 'block' : 'hidden'}` }
+            src={ Check }
+            alt=""
+          />
         </label>
+        <div
+          className={
+            `${!validEmail && email.length >= 1
+              ? 'block text-sm'
+              : 'hidden'}
+              bg-black
+              text-white
+              px-2
+              py-1
+              rounded-full
+              `
+          }
+        >
+          Please provide a valid email address
+
+        </div>
+
         <label
           htmlFor="password"
-          className="flex flex-col justify-center items-center"
+          className="flex justify-center items-center relative"
         >
           <input
-            className="border-2 border-orange-400 w-[95%] rounded px-2 py-1"
+            className="border-2 border-orange-400 w-[95%] rounded-full p-3"
             id="password"
             type="password"
             name="password"
-            value={ login.password }
+            value={ password }
             onChange={ handleChange }
-            placeholder="Senha"
+            placeholder="Password"
             data-testid="password-input"
           />
+          <img
+            className={ `
+          h-5
+          w-5
+          absolute
+          right-0
+          border-2
+          border-orange-400
+          rounded-full
+          ${validPassword ? 'block' : 'hidden'}` }
+            src={ Check }
+            alt=""
+          />
         </label>
+        <div
+          className={
+            `${!validPassword && password.length >= 1
+              ? 'block text-sm'
+              : 'hidden'}
+              bg-black
+              text-white
+              px-2
+              py-1
+              rounded-full
+              `
+          }
+        >
+          Please enter a minimum of 7 characters.
+
+        </div>
         <button
           type="submit"
           className={
             `
             w-1/2 
-            px-2 
-            py-1 
+            p-2
             mt-5 
-            rounded 
-            shadow-lg 
-            ${disable ? 'bg-orange-200' : 'bg-orange-400'}
+            rounded-full 
+            shadow-md
+            shadow-black
+            ${disable ? 'bg-orange-100' : 'bg-orange-400'}
             `
           }
           data-testid="login-submit-btn"
@@ -105,8 +137,8 @@ export default function Login() {
         >
           Login
         </button>
-      </div>
-    </form>
+      </form>
+    </div>
 
   );
 }
