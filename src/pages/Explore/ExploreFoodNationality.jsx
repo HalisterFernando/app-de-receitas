@@ -1,49 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Header from '../../components/Header';
-import MealNationaties from '../../components/MealNationaties';
-import { fetchMealByNationality, fetchMeals } from '../../services/foodServices';
+import NationatyOptions from '../../components/NationatyOptions';
 import RecipeCard from '../../components/Cards/RecipeCard';
-
-const INDEX = 12;
+import { AppContext } from '../../context/Provider';
 
 export default function ExploreFoodNationality() {
-  const [nationality, setNationality] = useState(null);
-  const [mealsByNationality, setMealsByNationality] = useState([]);
-
-  const handleNationality = ({ target: { value } }) => {
-    setNationality(value);
-  };
-
-  useEffect(() => {
-    const getFirstTwelveRecipes = async () => {
-      const { meals } = await fetchMeals();
-      setMealsByNationality(meals.slice(0, INDEX));
-    };
-    getFirstTwelveRecipes();
-  }, []);
-
-  useEffect(() => {
-    const getMealsByNationality = async () => {
-      const { meals } = await fetchMealByNationality(nationality);
-      setMealsByNationality(meals);
-    };
-
-    const getMeals = async () => {
-      const { meals } = await fetchMeals();
-      setMealsByNationality(meals);
-    };
-
-    if (nationality === 'All') {
-      getMeals();
-    } else if (nationality) {
-      getMealsByNationality();
-    }
-  }, [nationality]);
+  const { meals } = useContext(AppContext);
 
   return (
     <div className="h-screen flex flex-col">
       <Header />
-      <MealNationaties handleNationality={ handleNationality } />
+      <NationatyOptions />
       <div
         className="
       flex
@@ -56,7 +23,7 @@ export default function ExploreFoodNationality() {
       py-2
       "
       >
-        {mealsByNationality.map(({ idMeal, strMeal, strMealThumb }, index) => (
+        {meals.map(({ idMeal, strMeal, strMealThumb }, index) => (
           <RecipeCard
             key={ index }
             index={ index }

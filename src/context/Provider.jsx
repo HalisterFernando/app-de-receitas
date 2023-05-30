@@ -16,6 +16,7 @@ function Provider({ children }) {
   );
   const [finishedRecipes, setFinishedRecipes] = useState([]);
   const [allIngredients, setAllIngredients] = useState([]);
+  const [nationalities, setNationalities] = useState([]);
 
   const context = useMemo(() => ({
     userEmail,
@@ -38,8 +39,11 @@ function Provider({ children }) {
     setFinishedRecipes,
     allIngredients,
     setAllIngredients,
+    nationalities,
+    setNationalities,
   }), [userEmail, meals, drinks, toggleSearchBar, currentRecipe,
-    categories, favoriteRecipes, inProgressRecipes, finishedRecipes, allIngredients]);
+    categories, favoriteRecipes, inProgressRecipes,
+    finishedRecipes, allIngredients, nationalities]);
 
   return (
     <div>
