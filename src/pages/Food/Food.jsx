@@ -1,31 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { AppContext } from '../../context/Provider';
-import { fetchMeals } from '../../services/foodServices';
 import RecipeCard from '../../components/Cards/RecipeCard';
 import SearchBar from '../../components/SearchBar';
 import Loading from '../../components/Loading';
 import CategoryFilters from '../../components/CategoryFilters';
+import useFoodOrDrink from '../../hooks/useFoodOrDrink';
 import useLoading from '../../hooks/useLoading';
 
 const TYPE = 'foods';
 const INDEX = 12;
 
 export default function Food() {
-  const { meals, setMeals } = useContext(AppContext);
+  const { meals } = useContext(AppContext);
+  useFoodOrDrink(TYPE);
   const { loading } = useLoading();
-
-  useEffect(() => {
-    const getMeals = async () => {
-      const data = await fetchMeals();
-      setMeals(data.meals);
-    };
-    if (meals.length === 0) {
-      getMeals();
-    }
-  }, []);
 
   return (
     <div className="flex flex-col h-screen">
@@ -34,7 +25,7 @@ export default function Food() {
       <div className="h-16 w-full px-2 mt-1">
         <CategoryFilters type={ TYPE } />
       </div>
-      {loading ? <Loading /> : (
+      {loading ? (<Loading />) : (
         <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
           {meals.slice(0, INDEX).map(({ strMealThumb, strMeal, idMeal }, index) => (
             <RecipeCard

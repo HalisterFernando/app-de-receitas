@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { AppContext } from '../../context/Provider';
@@ -6,26 +6,16 @@ import RecipeCard from '../../components/Cards/RecipeCard';
 import SearchBar from '../../components/SearchBar';
 import Loading from '../../components/Loading';
 import CategoryFilters from '../../components/CategoryFilters';
+import useFoodOrDrink from '../../hooks/useFoodOrDrink';
 import useLoading from '../../hooks/useLoading';
-import { fetchDrinks } from '../../services/drinkServices';
 
 const INDEX = 12;
 const TYPE = 'drinks';
 
 export default function Drink() {
-  const { drinks, setDrinks } = useContext(AppContext);
+  const { drinks } = useContext(AppContext);
+  useFoodOrDrink(TYPE);
   const { loading } = useLoading();
-
-  useEffect(() => {
-    const getDrinks = async () => {
-      const { drinks: cocktails } = await fetchDrinks();
-      setDrinks(cocktails);
-    };
-    if (drinks.length === 0) {
-      getDrinks();
-    }
-  }, []);
-
   return (
     <div className="flex flex-col h-screen">
       <Header />
@@ -34,7 +24,7 @@ export default function Drink() {
         <CategoryFilters type={ TYPE } />
       </div>
       {loading ? <Loading /> : (
-        <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
+        <div className="flex flex-col items-center h-full gap-2 mt-2 overflow-y-scroll">
           {drinks.slice(0, INDEX).map(({ strDrinkThumb, strDrink, idDrink }, index) => (
             <RecipeCard
               key={ index }
