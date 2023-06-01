@@ -14,5 +14,6 @@
         "react"
     ],
     "rules": {
-    }
+    },
+    "ignorePatterns":["tailwind.config.js","src/test"]
 }
