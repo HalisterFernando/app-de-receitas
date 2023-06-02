@@ -2,35 +2,51 @@ import propTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function RecipeCard({ index, image, name, id }) {
+export default function RecipeCard({ index, image, name, id, animate }) {
   const linkTo = window.location.href
     .includes('/foods') ? `/foods/${id}` : `/drinks/${id}`;
   return (
     <Link to={ linkTo }>
       <div
-        className="
-      w-72
-      min-h-44
-      mb-5
-      rounded
-      shadow-md
-      shadow-black
-      flex
-      flex-col
-      justify-between
-      "
+        className={
+          `w-72
+        h-52
+        mb-5
+        rounded
+        shadow-md
+        shadow-black
+        flex
+        flex-col
+        justify-between
+        relative
+        ${animate && 'animate-slide-down'}
+      `
+        }
         data-testid={ `${index}-recipe-card` }
       >
-        <div className="h-36">
+        <div className="h-52">
           <img
             data-testid={ `${index}-card-img` }
             src={ image }
             alt={ name }
-            className="h-full w-full object-cover rounded-t"
+            className="h-full w-full object-cover rounded"
           />
         </div>
-        <div className="ml-2 mb-1 h-8 flex items-center">
-          <p data-testid={ `${index}-card-name` }>{ name }</p>
+        <div
+          className="
+        px-2
+        h-8
+        flex
+        items-center
+        absolute
+        bottom-0
+        bg-white
+        bg-opacity-75
+        font-semibold
+        rounded-b
+        w-full"
+        >
+          <p className="truncate" data-testid={ `${index}-card-name` }>{ name }</p>
         </div>
       </div>
     </Link>
@@ -42,4 +58,5 @@ RecipeCard.propTypes = {
   image: propTypes.string.isRequired,
   name: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
+  animate: propTypes.bool.isRequired,
 };

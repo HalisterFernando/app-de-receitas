@@ -9,6 +9,7 @@ import Loading from '../../components/Loading';
 import CategoryFilters from '../../components/CategoryFilters';
 import useFoodOrDrink from '../../hooks/useFoodOrDrink';
 import useLoading from '../../hooks/useLoading';
+import useCategoryFilters from '../../hooks/useCategoryFilters';
 
 const TYPE = 'foods';
 const INDEX = 12;
@@ -17,16 +18,33 @@ export default function Food() {
   const { meals } = useContext(AppContext);
   useFoodOrDrink(TYPE);
   const { loading } = useLoading();
+  const { allCategories, filterByCategory,
+    animate, categoryName } = useCategoryFilters(TYPE);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-gradient-to-t from-orange-200">
       <Header />
       <SearchBar type={ TYPE } />
       <div className="h-16 w-full px-2 mt-1">
-        <CategoryFilters type={ TYPE } />
+        <CategoryFilters
+          type={ TYPE }
+          allCategories={ allCategories }
+          filterByCategory={ filterByCategory }
+          categoryName={ categoryName }
+        />
       </div>
       {loading ? (<Loading />) : (
-        <div className="flex flex-col items-center gap-2 mt-2 overflow-y-scroll">
+        <div
+          className="flex
+        flex-col
+        items-center
+        gap-2
+        mt-2
+        h-full
+        overflow-y-scroll
+        animate-slide-up
+        "
+        >
           {meals.slice(0, INDEX).map(({ strMealThumb, strMeal, idMeal }, index) => (
             <RecipeCard
               key={ index }
@@ -34,6 +52,7 @@ export default function Food() {
               image={ strMealThumb }
               name={ strMeal }
               id={ idMeal }
+              animate={ animate }
             />
           ))}
         </div>
