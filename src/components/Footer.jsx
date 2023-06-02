@@ -1,34 +1,62 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Drink from '../images/drinkIcon.svg';
-import Explore from '../images/exploreIcon.svg';
-import Food from '../images/mealIcon.svg';
+import { BiDrink, BiCompass } from 'react-icons/bi';
+import { GiKnifeFork } from 'react-icons/gi';
+import useFooter from '../hooks/useFooter';
 
+const SELECTED = 'rounded-full h-10 w-10 shadow-sm shadow-black text-white bg-black';
+const UNSELECTED = 'rounded-full h-10 w-10 shadow-sm shadow-black text-black bg-white';
 function Footer() {
-  const navigate = useNavigate();
-
+  const { navigate, foodsPathname, drinksPathname, explorePathname } = useFooter();
   return (
-    <footer className="flex justify-between p-2" data-testid="footer">
-      <button type="button" onClick={ () => navigate('/drinks') }>
-        <img
-          src={ Drink }
-          alt="Drinks"
-          data-testid="drinks-bottom-btn"
-        />
+    <footer
+      className="
+    flex
+    justify-between
+    p-2
+    bg-gradient-to-t
+    from-orange-400
+    to-orange-200
+    "
+      data-testid="footer"
+    >
+      <button
+        className={
+          `${drinksPathname ? SELECTED : UNSELECTED}
+          flex
+          items-center
+          justify-center
+          `
+        }
+        type="button"
+        onClick={ () => navigate('/drinks') }
+      >
+        <BiDrink data-testid="drinks-bottom-btn" className="text-3xl" />
       </button>
-      <button type="button" onClick={ () => navigate('/explore') }>
-        <img
-          src={ Explore }
-          alt="Explore"
-          data-testid="explore-bottom-btn"
-        />
+      <button
+        className={
+          `${explorePathname ? SELECTED : UNSELECTED}
+          flex
+          items-center
+          justify-center
+        `
+        }
+        type="button"
+        onClick={ () => navigate('/explore') }
+      >
+        <BiCompass data-testid="explore-bottom-btn" className="text-3xl" />
       </button>
-      <button type="button" onClick={ () => navigate('/foods') }>
-        <img
-          src={ Food }
-          alt="Food"
-          data-testid="food-bottom-btn"
-        />
+      <button
+        className={
+          `${foodsPathname ? SELECTED : UNSELECTED}
+          flex
+          items-center
+          justify-center
+            `
+        }
+        type="button"
+        onClick={ () => navigate('/foods') }
+      >
+        <GiKnifeFork data-testid="food-bottom-btn" className="text-3xl" />
       </button>
     </footer>
   );
