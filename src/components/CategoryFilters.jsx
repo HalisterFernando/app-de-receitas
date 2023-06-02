@@ -1,67 +1,35 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
-import { AppContext } from '../context/Provider';
-import {
-  fetchMeals, fetchMealCategories, fetchMealsByCategory,
-} from '../services/foodServices';
 import useLoading from '../hooks/useLoading';
-import { fetchDrinkCategories, fetchDrinks,
-  fetchDrinksByCategory } from '../services/drinkServices';
+import { AppContext } from '../context/Provider';
 
 const INDEX = 5;
 
-export default function CategoryFilters({ type }) {
-  const { categories, setCategories, setMeals, setDrinks } = useContext(AppContext);
+export default function CategoryFilters(
+  { allCategories, filterByCategory, categoryName },
+) {
+  const { categories } = useContext(AppContext);
   const { loading } = useLoading();
-
-  const isTypeFoods = type === 'foods';
-
-  useEffect(() => {
-    const getMealCategories = async () => {
-      const { meals } = await fetchMealCategories();
-      setCategories(meals);
-    };
-
-    const getDrinkCategories = async () => {
-      const { drinks } = await fetchDrinkCategories();
-      setCategories(drinks);
-    };
-
-    if (isTypeFoods) {
-      getMealCategories();
-    } else {
-      getDrinkCategories();
-    }
-  }, []);
-
-  const allCategories = async () => {
-    if (isTypeFoods) {
-      const { meals } = await fetchMeals();
-      setMeals(meals);
-    } else {
-      const { drinks } = await fetchDrinks();
-      setDrinks(drinks);
-    }
-  };
-
-  const filterByCategory = async ({ target: { name } }) => {
-    if (isTypeFoods) {
-      const { meals } = await fetchMealsByCategory(name);
-      setMeals(meals);
-    } else {
-      const { drinks } = await fetchDrinksByCategory(name);
-      setDrinks(drinks);
-    }
-  };
 
   return !loading && (
     <div className="overflow-x-scroll px-1">
-      <div className="flex min-w-min gap-2 my-2">
+      <div className="flex min-w-min gap-3 my-2">
         <button
           type="button"
-          className="bg-orange-400 rounded shadow-md shadow-black p-1 w-20 text-sm"
+          name="All"
+          className={ `
+          ${categoryName === 'All' && 'bg-orange-400'}
+          rounded-full
+          shadow-md
+          shadow-black
+          h-7
+          p-1
+          w-24
+          text-xs
+          truncate
+          ` }
           data-testid="All-category-filter"
-          onClick={ allCategories }
+          onClick={ (ev) => allCategories(ev) }
         >
           All
         </button>
@@ -70,9 +38,20 @@ export default function CategoryFilters({ type }) {
             data-testid={ `${strCategory}-category-filter` }
             type="button"
             key={ index }
-            onClick={ filterByCategory }
+            onClick={ (ev) => filterByCategory(ev) }
             name={ strCategory }
-            className="bg-orange-400 rounded shadow-md shadow-black p-1 w-24 text-xs"
+            className={ `
+            ${categoryName === strCategory && 'bg-orange-400'}
+            rounded-full
+            shadow-md
+            shadow-black
+            h-7
+            p-1
+            w-24
+            text-xs
+            truncate
+            ` }
+
           >
             {strCategory}
           </button>
@@ -83,5 +62,7 @@ export default function CategoryFilters({ type }) {
 }
 
 CategoryFilters.propTypes = {
-  type: propTypes.string.isRequired,
+  allCategories: propTypes.func.isRequired,
+  filterByCategory: propTypes.func.isRequired,
+  categoryName: propTypes.string.isRequired,
 };
