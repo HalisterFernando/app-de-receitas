@@ -6,7 +6,7 @@ import App from '../App';
 
 describe('Food test suites', () => {
     beforeEach(() => {
-      const { debug } =  renderWithRouter(<App />, { route: '/foods'})
+      renderWithRouter(<App />, { route: '/foods'})
     })
     it('should render header and footer', () => {
        const pageTitle = screen.getByTestId('page-title');
