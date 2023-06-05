@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import SearchBarFilters from './SearchBarFilters';
 import useSearchBar from '../hooks/useSearchBar';
 
-function SearchBar({ type }) {
+function SearchBar({ type, animateCard }) {
   const { setFilter, setSearchValue,
     toggleSearchBar, handleSearchBar } = useSearchBar(type);
 
@@ -25,18 +25,29 @@ function SearchBar({ type }) {
             onChange={ (ev) => setSearchValue(ev.target.value) }
             id="valueName"
             placeholder="Pesquisar"
-            className="p-1 border-2 border-orange-400 rounded text-sm"
+            className="py-1 px-3 border-2 border-orange-400 rounded-full text-sm"
           />
         </label>
         <SearchBarFilters setValue={ setFilter } />
         <button
-          className="mx-auto w-16 block bg-orange-400 rounded shadow-md p-1 my-2 text-sm"
+          className="
+          mx-auto
+          w-16
+          block
+          bg-orange-400
+          rounded-full
+          shadow-md
+          shadow-black
+          p-1
+          my-2
+          text-sm
+          "
           type="button"
           data-testid="exec-search-btn"
-          onClick={ () => handleSearchBar() }
+          onClick={ () => { handleSearchBar(); animateCard(); } }
           id="exerc-search-btn"
         >
-          Buscar
+          Search
         </button>
       </div>
     </form>
@@ -44,7 +55,8 @@ function SearchBar({ type }) {
 }
 
 SearchBar.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: propTypes.string.isRequired,
+  animateCard: propTypes.func.isRequired,
 };
 
 export default SearchBar;

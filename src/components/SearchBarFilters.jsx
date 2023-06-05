@@ -14,7 +14,7 @@ export default function SearchBarFilters({ setValue }) {
             onClick={ () => setValue('ingrediente') }
             className="mr-1"
           />
-          Ingrediente
+          Ingredient
         </label>
       </div>
       <div>
@@ -27,7 +27,7 @@ export default function SearchBarFilters({ setValue }) {
             onClick={ () => setValue('nome') }
             className="mr-1"
           />
-          Nome
+          Name
         </label>
       </div>
       <div>
@@ -40,7 +40,7 @@ export default function SearchBarFilters({ setValue }) {
             onClick={ () => setValue('primeira letra') }
             className="mr-1"
           />
-          Primeira Letra
+          First letter
         </label>
       </div>
     </div>

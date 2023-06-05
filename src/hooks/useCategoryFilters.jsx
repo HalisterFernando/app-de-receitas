@@ -64,5 +64,5 @@ export default function useCategoryFilters(type) {
     animateCard();
   };
 
-  return { allCategories, filterByCategory, animate, categoryName };
+  return { allCategories, filterByCategory, animate, categoryName, animateCard };
 }

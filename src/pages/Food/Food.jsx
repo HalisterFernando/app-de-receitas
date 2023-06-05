@@ -19,12 +19,12 @@ export default function Food() {
   useFoodOrDrink(TYPE);
   const { loading } = useLoading();
   const { allCategories, filterByCategory,
-    animate, categoryName } = useCategoryFilters(TYPE);
+    animate, categoryName, animateCard } = useCategoryFilters(TYPE);
 
   return (
     <div className="flex flex-col h-screen bg-gradient-to-t from-orange-200">
       <Header />
-      <SearchBar type={ TYPE } />
+      <SearchBar type={ TYPE } animateCard={ animateCard } />
       <div className="h-16 w-full px-2 mt-1">
         <CategoryFilters
           type={ TYPE }
