@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import clipboardCopy from 'clipboard-copy';
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../../components/Loading';
@@ -18,25 +18,17 @@ const TYPE = 'foods';
 export default function FoodDetails() {
   const { id } = useParams();
   useRecipeDetails(id, TYPE);
-  useFinishedRecipes();
+  const { isRecipeFinished } = useFinishedRecipes(id, TYPE);
   const { loading } = useLoading();
   const { show, timeOut } = useTimeOut();
-  const { currentRecipe: { recipe, ingredients },
-    favoriteRecipes, finishedRecipes } = useContext(AppContext);
-  const { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite } = useFavorite();
-  const [isFavorite, setIsFavorite] = useState('');
-
-  useEffect(() => {
-    setIsFavorite(favoriteRecipes.some((favorite) => favorite.id === id));
-  }, [favoriteRecipes]);
+  const { currentRecipe: { recipe, ingredients } } = useContext(AppContext);
+  const { addFavoriteRecipe, removeFavoriteRecipe,
+    recipeToFavorite, isFavorite } = useFavorite(id);
 
   const handleShare = () => {
     clipboardCopy(`http://localhost:3000/foods/${id}`);
     timeOut();
   };
-
-  const isRecipeFinished = () => finishedRecipes
-    .some((finishedRecipe) => finishedRecipe.id === id);
 
   return (
     <div>
@@ -96,7 +88,7 @@ export default function FoodDetails() {
             >
               <button
                 className={
-                  `${isRecipeFinished() ? 'hidden' : 'block'} 
+                  `${isRecipeFinished ? 'hidden' : 'block'} 
                   mx-auto 
                   bg-orange-400 
                   p-1 

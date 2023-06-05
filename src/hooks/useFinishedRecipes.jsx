@@ -1,11 +1,12 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/Provider';
 import { getItem, setItem } from '../services/localStorageServices';
 
-export default function useFinishedRecipes(type) {
-  const { finishedRecipes, setFinishedRecipes } = useContext(AppContext);
+export default function useFinishedRecipes(recipeId, type) {
   const navigate = useNavigate();
+  const { finishedRecipes, setFinishedRecipes } = useContext(AppContext);
+  const [isRecipeFinished, setIsRecipeFinished] = useState(false);
 
   useEffect(() => {
     const doneRecipes = getItem('doneRecipes');
@@ -13,6 +14,10 @@ export default function useFinishedRecipes(type) {
       setFinishedRecipes(doneRecipes);
     }
   }, []);
+
+  useEffect(() => {
+    setIsRecipeFinished(finishedRecipes.some((recipe) => recipe.id === recipeId));
+  }, [finishedRecipes]);
 
   const recipeToFinish = (recipe) => {
     if (type === 'foods') {
@@ -54,5 +59,5 @@ export default function useFinishedRecipes(type) {
     navigate('/done-recipes');
   };
 
-  return { finishRecipe };
+  return { finishRecipe, isRecipeFinished };
 }

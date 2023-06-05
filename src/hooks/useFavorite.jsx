@@ -1,9 +1,10 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../context/Provider';
 import { getItem, setItem } from '../services/localStorageServices';
 
-export default function useFavorite() {
+export default function useFavorite(recipeId) {
   const { favoriteRecipes, setFavoriteRecipes } = useContext(AppContext);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const favorites = getItem('favoriteRecipes');
@@ -11,6 +12,10 @@ export default function useFavorite() {
       setFavoriteRecipes(favorites);
     }
   }, []);
+
+  useEffect(() => {
+    setIsFavorite(favoriteRecipes.some((recipe) => recipe.id === recipeId));
+  }, [favoriteRecipes]);
 
   const recipeToFavorite = (recipe, type) => {
     if (type === 'foods') {
@@ -55,5 +60,5 @@ export default function useFavorite() {
     setItem('favoriteRecipes', updatedFavorites);
   };
 
-  return { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite };
+  return { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite, isFavorite };
 }
