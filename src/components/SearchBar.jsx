@@ -1,58 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-import {
-  getByIngredient,
-  getByName,
-  getByFirstLetter } from '../services/searchBarServices';
-import { AppContext } from '../context/Provider';
 import SearchBarFilters from './SearchBarFilters';
+import useSearchBar from '../hooks/useSearchBar';
 
 function SearchBar({ type }) {
-  const [filter, setFilter] = useState('');
-  const [searchValue, setSearchValue] = useState('');
-  const { setMeals, setDrinks, toggleSearchBar } = useContext(AppContext);
-  const customAlert = window.alert;
-
-  const navigate = useNavigate();
-
-  const routesToPush = {
-    foods: (result) => navigate(`/${type}/${result[0].idMeal}`),
-    drinks: (result) => navigate(`/${type}/${result[0].idDrink}`),
-  };
-
-  const searchResult = (result) => {
-    if (result.length === 1) return routesToPush[type](result);
-
-    if (type === 'foods') {
-      setMeals(result);
-    }
-    if (type === 'drinks') {
-      setDrinks(result);
-    }
-  };
-
-  const searchFilters = {
-    ingrediente: async () => getByIngredient(searchValue, type),
-    nome: async () => getByName(searchValue, type),
-    'primeira letra': async () => {
-      if (searchValue.length > 1) {
-        return customAlert('Your search must have only 1 (one) character');
-      }
-      return getByFirstLetter(searchValue, type);
-    },
-  };
-
-  const handleSearchBar = async () => {
-    const response = await searchFilters[filter]();
-
-    if (!response) {
-      return customAlert(
-        'Sorry, we haven\'t found any recipes for these filters.',
-      );
-    }
-    return searchResult(response);
-  };
+  const { setFilter, setSearchValue,
+    toggleSearchBar, handleSearchBar } = useSearchBar(type);
 
   return (
     <form>
