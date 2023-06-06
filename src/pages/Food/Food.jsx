@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import propTypes from 'prop-types';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { AppContext } from '../../context/Provider';
@@ -61,7 +60,3 @@ export default function Food() {
     </div>
   );
 }
-
-Food.propTypes = {
-  objectList: propTypes.object,
-}.isRequired;
