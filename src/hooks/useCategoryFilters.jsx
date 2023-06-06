@@ -23,6 +23,24 @@ export default function useCategoryFilters(type) {
   };
 
   useEffect(() => {
+    const getMeals = async () => {
+      const { meals } = await fetchMeals();
+      setMeals(meals);
+    };
+
+    const getDrinks = async () => {
+      const { drinks } = await fetchDrinks();
+      setDrinks(drinks);
+    };
+
+    if (isTypeFoods) {
+      getMeals();
+    } else {
+      getDrinks();
+    }
+  }, []);
+
+  useEffect(() => {
     const getMealCategories = async () => {
       const { meals } = await fetchMealCategories();
       setCategories(meals);
