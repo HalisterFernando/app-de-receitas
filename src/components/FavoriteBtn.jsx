@@ -1,20 +1,21 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Favorite from '../images/blackHeartIcon.svg';
-import NotFavorite from '../images/whiteHeartIcon.svg';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 export default function FavoriteBtn(
   { recipe, isFavorite, add = () => {}, remove = () => {}, type = null },
 ) {
   return (
     <button
+      className="bg-orange-300 h-8 w-8 rounded-full p-1"
       type="button"
       onClick={ () => (isFavorite ? remove(recipe, type) : add(recipe, type)) }
     >
-      <img
-        src={ isFavorite ? Favorite : NotFavorite }
-        alt={ isFavorite ? 'favorito' : 'não favorito' }
-      />
+      <span className="text-2xl">
+        {
+          isFavorite ? <AiFillHeart /> : <AiOutlineHeart />
+        }
+      </span>
     </button>
   );
 }
