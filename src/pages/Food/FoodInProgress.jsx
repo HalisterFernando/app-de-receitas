@@ -26,7 +26,7 @@ export default function FoodInProgress() {
   const { show, timeOut } = useTimeOut();
   const [isFavorite, setIsFavorite] = useState('');
   const { addIngredient, removeIngredient } = useInProgress(id, TYPE);
-  const { finishRecipe } = useFinishedRecipes(TYPE);
+  const { finishRecipe } = useFinishedRecipes(id, TYPE);
 
   const mealsForId = meals[id] || [];
 
