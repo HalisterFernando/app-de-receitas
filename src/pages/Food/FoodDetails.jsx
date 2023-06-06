@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import clipboardCopy from 'clipboard-copy';
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import { AppContext } from '../../context/Provider';
@@ -8,79 +7,102 @@ import useLoading from '../../hooks/useLoading';
 import FavoriteBtn from '../../components/FavoriteBtn';
 import useFavorite from '../../hooks/useFavorite';
 import Recomendations from '../../components/Recomendations';
-import useTimeOut from '../../hooks/useTimeout';
 import Alert from '../../components/Alert';
 import ShareBtn from '../../components/ShareBtn';
 import useFinishedRecipes from '../../hooks/useFinishedRecipes';
+import Footer from '../../components/Footer';
+import useShare from '../../hooks/useShare';
 
 const TYPE = 'foods';
+const URL = window.location.href;
 
 export default function FoodDetails() {
   const { id } = useParams();
-  useRecipeDetails(id, TYPE);
+  const { convertUrlToEmbed } = useRecipeDetails(id, TYPE);
   const { isRecipeFinished } = useFinishedRecipes(id, TYPE);
   const { loading } = useLoading();
-  const { show, timeOut } = useTimeOut();
+  const { show, handleShare } = useShare(URL);
   const { currentRecipe: { recipe, ingredients } } = useContext(AppContext);
   const { addFavoriteRecipe, removeFavoriteRecipe,
     recipeToFavorite, isFavorite } = useFavorite(id);
 
-  const handleShare = () => {
-    clipboardCopy(`http://localhost:3000/foods/${id}`);
-    timeOut();
-  };
-
   return (
-    <div>
+    <div className="flex flex-col h-screen bg-orange-200">
       {
         loading ? <Loading /> : (
-          <>
+          <div className="overflow-y-scroll animate-slide-up">
             <img
-              className="image-recipe"
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
               data-testid="recipe-photo"
             />
-            <div className="flex items-center justify-between p-2">
-
-              <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
-              <div className="flex gap-3">
-                <ShareBtn handleShare={ handleShare } />
-                <FavoriteBtn
-                  recipe={ recipeToFavorite(recipe, TYPE) }
-                  add={ addFavoriteRecipe }
-                  remove={ removeFavoriteRecipe }
-                  isFavorite={ isFavorite }
-                  type={ TYPE }
-                />
-              </div>
-            </div>
-            {show && <Alert show={ show } />}
-            <ul className="bg-orange-400 p-2 m-2 rounded">
-              <h3 data-testid="recipe-category">{ recipe.strCategory }</h3>
-              {ingredients.map((ingredient, index) => (
-                <li
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                  key={ ingredient }
+            <div className="p-2 m-2 bg-white rounded-xl">
+              <div
+                className="
+                flex
+                items-center
+                justify-between
+                "
+              >
+                <h1
+                  className="text-orange-600 text-xl font-semibold"
+                  data-testid="recipe-title"
                 >
-                  { ingredient }
-                </li>
-              ))}
-            </ul>
-            <p
-              data-testid="instructions"
-              className="bg-orange-400 p-2 m-2 rounded"
-            >
-              { recipe.strInstructions }
-            </p>
+                  { recipe.strMeal }
+                </h1>
+                <div className="flex gap-3">
+                  <ShareBtn handleShare={ handleShare } />
+                  <FavoriteBtn
+                    recipe={ recipeToFavorite(recipe, TYPE) }
+                    add={ addFavoriteRecipe }
+                    remove={ removeFavoriteRecipe }
+                    isFavorite={ isFavorite }
+                    type={ TYPE }
+                  />
+                </div>
+              </div>
+              {show && <Alert show={ show } />}
+              <h4
+                className="text-sm text-slate-900 my-2"
+                data-testid="recipe-category"
+              >
+                { `Category - ${recipe.strCategory}` }
+              </h4>
+              <h3 className="font-semibold my-2 text-orange-600">Ingredients</h3>
+              <ul className="list-disc pl-4 marker:text-orange-600">
+                {ingredients.map((ingredient, index) => (
+                  <li
+                    className="text-sm my-1"
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                    key={ ingredient }
+                  >
+                    { ingredient }
+                  </li>
+                ))}
+              </ul>
+              <h3 className="font-semibold my-2 text-orange-600">Instructions</h3>
+              <p
+                data-testid="instructions"
+                className=""
+              >
+                { recipe.strInstructions }
+              </p>
+            </div>
             <iframe
-              className="mx-auto block my-4"
-              title="Videeo"
-              data-testid="video"
-              allow="fullscreen"
-              src={ recipe.strYoutube }
+              className="w-[300px] h-72 mx-auto"
+              src={ convertUrlToEmbed(recipe.strYoutube) }
+              title="YouTube video player"
+              allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+              web-share"
+              allowfullscreen
             />
-            <div className="overflow-x-scroll mt-5">
+            <div className="overflow-x-scroll mt-5 mx-2">
               <Recomendations type={ TYPE } />
             </div>
             <Link
@@ -91,9 +113,14 @@ export default function FoodDetails() {
                   `${isRecipeFinished ? 'hidden' : 'block'} 
                   mx-auto 
                   bg-orange-400 
-                  p-1 
-                  rounded 
-                  my-4`
+                  py-1 
+                  px-2 
+                  my-4
+                  rounded-full
+                  shadow-md
+                  shadow-black 
+                  font-semibold
+                  `
                 }
                 type="button"
                 data-testid="start-recipe-btn"
@@ -101,9 +128,10 @@ export default function FoodDetails() {
                 Start Recipe
               </button>
             </Link>
-          </>
+          </div>
         )
       }
+      <Footer />
     </div>
   );
 }
