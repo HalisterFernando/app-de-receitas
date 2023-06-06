@@ -1,7 +1,11 @@
 import clipboardCopy from 'clipboard-copy';
 import { useState } from 'react';
 
-export default function useShare(url) {
+let URL;
+
+export default function useShare() {
+  URL = window.location.href;
+
   const [show, setShow] = useState(false);
 
   const timeOut = () => {
@@ -13,7 +17,7 @@ export default function useShare(url) {
   };
 
   const handleShare = () => {
-    clipboardCopy(url);
+    clipboardCopy(URL);
     timeOut();
   };
 

@@ -15,14 +15,13 @@ import useShare from '../../hooks/useShare';
 import Footer from '../../components/Footer';
 
 const TYPE = 'drinks';
-const URL = window.location.href;
 
 export default function DrinkDetails() {
   const { id } = useParams();
   const { convertUrlToEmbed } = useRecipeDetails(id, TYPE);
   const { isRecipeFinished } = useFinishedRecipes(id, TYPE);
   const { loading } = useLoading();
-  const { show, handleShare } = useShare(URL);
+  const { show, handleShare } = useShare();
   const { currentRecipe: { recipe, ingredients } } = useContext(AppContext);
   const { addFavoriteRecipe, removeFavoriteRecipe,
     recipeToFavorite, isFavorite } = useFavorite(id);
