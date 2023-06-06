@@ -83,7 +83,6 @@ export default function FoodDetails() {
               <h3 className="font-semibold my-2 text-orange-600">Instructions</h3>
               <p
                 data-testid="instructions"
-                className=""
               >
                 { recipe.strInstructions }
               </p>
@@ -112,10 +111,10 @@ export default function FoodDetails() {
                 className={
                   `${isRecipeFinished ? 'hidden' : 'block'} 
                   mx-auto 
-                  bg-orange-400 
                   py-1 
                   px-2 
                   my-4
+                  bg-orange-400 
                   rounded-full
                   shadow-md
                   shadow-black 
