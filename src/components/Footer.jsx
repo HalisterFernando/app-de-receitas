@@ -3,8 +3,8 @@ import { BiDrink, BiCompass } from 'react-icons/bi';
 import { GiKnifeFork } from 'react-icons/gi';
 import useFooter from '../hooks/useFooter';
 
-const SELECTED = 'rounded-full h-10 w-10 shadow-sm shadow-black text-white bg-black';
-const UNSELECTED = 'rounded-full h-10 w-10 shadow-sm shadow-black text-black bg-white';
+const SELECTED = 'rounded-full h-9 w-9 shadow-sm shadow-black text-white bg-black';
+const UNSELECTED = 'rounded-full h-9 w-9 shadow-sm shadow-black text-black bg-white';
 function Footer() {
   const { navigate, foodsPathname, drinksPathname, explorePathname } = useFooter();
   return (
@@ -12,7 +12,7 @@ function Footer() {
       className="
     flex
     justify-between
-    p-2
+    p-1
     bg-gradient-to-t
     from-orange-400
     to-orange-200
@@ -30,7 +30,7 @@ function Footer() {
         type="button"
         onClick={ () => navigate('/drinks') }
       >
-        <BiDrink data-testid="drinks-bottom-btn" className="text-3xl" />
+        <BiDrink data-testid="drinks-bottom-btn" className="text-2xl" />
       </button>
       <button
         className={
@@ -43,7 +43,7 @@ function Footer() {
         type="button"
         onClick={ () => navigate('/explore') }
       >
-        <BiCompass data-testid="explore-bottom-btn" className="text-3xl" />
+        <BiCompass data-testid="explore-bottom-btn" className="text-2xl" />
       </button>
       <button
         className={
@@ -56,7 +56,7 @@ function Footer() {
         type="button"
         onClick={ () => navigate('/foods') }
       >
-        <GiKnifeFork data-testid="food-bottom-btn" className="text-3xl" />
+        <GiKnifeFork data-testid="food-bottom-btn" className="text-2xl" />
       </button>
     </footer>
   );

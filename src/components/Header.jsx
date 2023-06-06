@@ -16,7 +16,7 @@ export default function Header() {
     flex
     justify-between
     items-center
-    p-2
+    p-1
     bg-gradient-to-b
     from-orange-400
     to-orange-200
@@ -25,8 +25,8 @@ export default function Header() {
       <button
         className="
         rounded-full
-        h-10
-        w-10
+        h-9
+        w-9
         bg-white
         shadow-sm
         shadow-black
@@ -36,7 +36,7 @@ export default function Header() {
       >
         <BsPersonCircle
           data-testid="profile-top-btn"
-          className="text-3xl block mx-auto"
+          className="text-2xl block mx-auto"
         />
       </button>
       <div
@@ -44,29 +44,25 @@ export default function Header() {
       rounded-full
       bg-white
       w-48
-      h-10
+      h-8
       shadow-sm
       shadow-black
-      p-4
-      flex
-      items-center
-      justify-center
       "
       >
-        <span
-          className="font-mono font-semibold text-2xl line"
+        <h1
+          className="font-semibold text-2xl text-center"
           data-testid="page-title"
         >
           { headerTitles[pathname] }
-        </span>
+        </h1>
       </div>
 
       {checkPath() ? (
         <button
           className="
       rounded-full
-      h-10
-      w-10
+      h-9
+      w-9
       bg-white
       shadow-sm
       shadow-black
@@ -76,7 +72,7 @@ export default function Header() {
         >
           <BsSearch
             data-testid="search-top-btn"
-            className="text-3xl block mx-auto"
+            className="text-2xl block mx-auto"
           />
         </button>
       ) : (
