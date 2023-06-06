@@ -8,6 +8,8 @@ export default function useRecipeDetails(id, type) {
   const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState([]);
 
+  const convertUrlToEmbed = (url) => url.replace('/watch?v=', '/embed/');
+
   useEffect(() => {
     setCurrentRecipe({ recipe, ingredients });
   }, [recipe, ingredients, setCurrentRecipe]);
@@ -53,4 +55,6 @@ export default function useRecipeDetails(id, type) {
   useEffect(() => {
     getIngredients();
   }, [recipe]);
+
+  return { convertUrlToEmbed };
 }
