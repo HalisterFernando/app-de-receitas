@@ -10,6 +10,8 @@ export default function useRecipeDetails(id, type) {
 
   const convertUrlToEmbed = (url) => url.replace('/watch?v=', '/embed/');
 
+  const isTypeFoods = type === 'foods';
+
   useEffect(() => {
     setCurrentRecipe({ recipe, ingredients });
   }, [recipe, ingredients, setCurrentRecipe]);
@@ -25,7 +27,7 @@ export default function useRecipeDetails(id, type) {
       setRecipe(drink);
     };
 
-    if (type === 'foods') {
+    if (isTypeFoods) {
       getMealById();
     } else {
       getDrinkById();
