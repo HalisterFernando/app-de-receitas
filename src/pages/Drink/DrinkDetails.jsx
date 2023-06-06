@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import clipboardCopy from 'clipboard-copy';
+import React, { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import { AppContext } from '../../context/Provider';
@@ -8,108 +7,137 @@ import useLoading from '../../hooks/useLoading';
 import FavoriteBtn from '../../components/FavoriteBtn';
 import useFavorite from '../../hooks/useFavorite';
 import Recomendations from '../../components/Recomendations';
-import useTimeOut from '../../hooks/useTimeout';
+
 import Alert from '../../components/Alert';
 import ShareBtn from '../../components/ShareBtn';
 import useFinishedRecipes from '../../hooks/useFinishedRecipes';
+import useShare from '../../hooks/useShare';
+import Footer from '../../components/Footer';
 
 const TYPE = 'drinks';
+const URL = window.location.href;
 
 export default function DrinkDetails() {
   const { id } = useParams();
-  useRecipeDetails(id, TYPE);
-  useFinishedRecipes();
+  const { convertUrlToEmbed } = useRecipeDetails(id, TYPE);
+  const { isRecipeFinished } = useFinishedRecipes(id, TYPE);
   const { loading } = useLoading();
-  const { show, timeOut } = useTimeOut();
-  const { currentRecipe: { recipe, ingredients },
-    favoriteRecipes, finishedRecipes } = useContext(AppContext);
-  const { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite } = useFavorite();
-  const [isFavorite, setIsFavorite] = useState('');
-
-  useEffect(() => {
-    setIsFavorite(favoriteRecipes.some((favorite) => favorite.id === id));
-  }, [favoriteRecipes]);
-
-  const handleShare = () => {
-    clipboardCopy(`http://localhost:3000/foods/${id}`);
-    timeOut();
-  };
-
-  const isRecipeFinished = () => finishedRecipes
-    .some((finishedRecipe) => finishedRecipe.id === id);
+  const { show, handleShare } = useShare(URL);
+  const { currentRecipe: { recipe, ingredients } } = useContext(AppContext);
+  const { addFavoriteRecipe, removeFavoriteRecipe,
+    recipeToFavorite, isFavorite } = useFavorite(id);
 
   return (
-    <div>
-      {loading ? <Loading /> : (
-        <>
-          <img
-            className="image-recipe"
-            src={ recipe.strDrinkThumb }
-            alt={ recipe.strDrink }
-            data-testid="recipe-photo"
-          />
-          <div className="flex items-center justify-between p-2">
-
-            <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-            <div className="flex gap-3">
-              <ShareBtn handleShare={ handleShare } />
-              <FavoriteBtn
-                recipe={ recipeToFavorite(recipe, TYPE) }
-                add={ addFavoriteRecipe }
-                remove={ removeFavoriteRecipe }
-                isFavorite={ isFavorite }
-                type={ TYPE }
-              />
-            </div>
-          </div>
-          {show && <Alert show={ show } />}
-          <ul className="bg-orange-400 p-2 m-2 rounded">
-            <h3 data-testid="recipe-category">{ recipe.strCategory }</h3>
-            {ingredients.map((ingredient, index) => (
-              <li
-                data-testid={ `${index}-ingredient-name-and-measure` }
-                key={ ingredient }
+    <div className="flex flex-col h-screen bg-orange-200">
+      {
+        loading ? <Loading /> : (
+          <div className="overflow-y-scroll animate-slide-up">
+            <img
+              src={ recipe.strDrinkThumb }
+              alt={ recipe.strDrink }
+              data-testid="recipe-photo"
+            />
+            <div className="p-2 m-2 bg-white rounded-xl">
+              <div
+                className="
+              flex
+              items-center
+              justify-between
+              "
               >
-                { ingredient }
-              </li>
-            ))}
-          </ul>
-          <p
-            data-testid="instructions"
-            className="bg-orange-400 p-2 m-2 rounded"
-          >
-            { recipe.strInstructions }
-          </p>
-          <iframe
-            className="mx-auto block my-4"
-            title="Videeo"
-            data-testid="video"
-            allow="fullscreen"
-            src={ recipe.strYoutube }
-          />
-          <div className="overflow-x-scroll mt-5">
-            <Recomendations type={ TYPE } />
-          </div>
-          <Link
-            to={ `/foods/${id}/in-progress` }
-          >
-            <button
-              className={
-                `${isRecipeFinished() ? 'hidden' : 'block'} 
-                  mx-auto 
-                  bg-orange-400 
-                  p-1 
-                  rounded 
-                  my-4`
-              }
-              type="button"
-              data-testid="start-recipe-btn"
+                <h1
+                  className="text-orange-600 text-xl font-semibold"
+                  data-testid="recipe-title"
+                >
+                  { recipe.strDrink }
+                </h1>
+                <div className="flex gap-3">
+                  <ShareBtn handleShare={ handleShare } />
+                  <FavoriteBtn
+                    recipe={ recipeToFavorite(recipe, TYPE) }
+                    add={ addFavoriteRecipe }
+                    remove={ removeFavoriteRecipe }
+                    isFavorite={ isFavorite }
+                    type={ TYPE }
+                  />
+                </div>
+              </div>
+              {show && <Alert show={ show } />}
+              <h4
+                className="text-sm text-slate-900 my-2"
+                data-testid="recipe-category"
+              >
+                { `Category - ${recipe.strCategory}` }
+              </h4>
+              <h3 className="font-semibold my-2 text-orange-600">Ingredients</h3>
+              <ul className="list-disc pl-4 marker:text-orange-600">
+                {ingredients.map((ingredient, index) => (
+                  <li
+                    className="text-sm my-1"
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                    key={ ingredient }
+                  >
+                    { ingredient }
+                  </li>
+                ))}
+              </ul>
+              <h3 className="font-semibold my-2 text-orange-600">Instructions</h3>
+              <p
+                data-testid="instructions"
+              >
+                { recipe.strInstructions }
+              </p>
+            </div>
+            {
+              recipe.strVideo !== null && (
+                <iframe
+                  className="w-[300px] h-72 mx-auto"
+                  src={ convertUrlToEmbed(recipe.strVideo) }
+                  title="YouTube video player"
+                  allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share
+                  "
+                  allowfullscreen
+                />
+              )
+            }
+
+            <div className="overflow-x-scroll mt-5 mx-2">
+              <Recomendations type={ TYPE } />
+            </div>
+            <Link
+              to={ `/foods/${id}/in-progress` }
             >
-              Start Recipe
-            </button>
-          </Link>
-        </>
-      )}
+              <button
+                className={
+                  `${isRecipeFinished ? 'hidden' : 'block'} 
+                mx-auto 
+                py-1 
+                px-2 
+                my-4
+                bg-orange-400 
+                rounded-full
+                shadow-md
+                shadow-black 
+                font-semibold
+                `
+                }
+                type="button"
+                data-testid="start-recipe-btn"
+              >
+                Start Recipe
+              </button>
+            </Link>
+          </div>
+        )
+      }
+      <Footer />
     </div>
   );
 }
