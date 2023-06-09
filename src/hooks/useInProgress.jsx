@@ -66,5 +66,13 @@ export default function useInProgress(id, type) {
     }
   };
 
-  return { addIngredient, removeIngredient };
+  const handleUsedIngredients = ({ target: { checked, value } }) => {
+    if (checked) {
+      addIngredient(value);
+    } else {
+      removeIngredient(value);
+    }
+  };
+
+  return { handleUsedIngredients };
 }
