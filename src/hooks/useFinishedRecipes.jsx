@@ -5,7 +5,9 @@ import { getItem, setItem } from '../services/localStorageServices';
 
 export default function useFinishedRecipes(recipeId, type) {
   const navigate = useNavigate();
-  const { finishedRecipes, setFinishedRecipes } = useContext(AppContext);
+  const { finishedRecipes, setFinishedRecipes,
+    currentRecipe: { ingredients },
+    inProgressRecipes: { meals } } = useContext(AppContext);
   const [isRecipeFinished, setIsRecipeFinished] = useState(false);
 
   useEffect(() => {
@@ -59,5 +61,10 @@ export default function useFinishedRecipes(recipeId, type) {
     navigate('/done-recipes');
   };
 
-  return { finishRecipe, isRecipeFinished };
+  const isReadyToFinish = () => {
+    console.log(ingredients?.length === meals[recipeId]?.length);
+    return ingredients?.length === meals[recipeId]?.length;
+  };
+
+  return { finishRecipe, isRecipeFinished, isReadyToFinish };
 }
