@@ -68,10 +68,10 @@ export default function FoodDetails() {
                 { `Category - ${recipe.strCategory}` }
               </h4>
               <h3 className="font-semibold my-2 text-orange-600">Ingredients</h3>
-              <ul className="list-disc pl-4 marker:text-orange-600">
+              <ul className="list-disc pl-5 marker:text-orange-600">
                 {ingredients.map((ingredient, index) => (
                   <li
-                    className="text-sm my-1"
+                    className="my-1"
                     data-testid={ `${index}-ingredient-name-and-measure` }
                     key={ ingredient }
                   >
