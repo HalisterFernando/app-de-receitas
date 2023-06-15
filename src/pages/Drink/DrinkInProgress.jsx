@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
-
 import { useParams } from 'react-router-dom';
 import useFavorite from '../../hooks/useFavorite';
 import { AppContext } from '../../context/Provider';
 import FavoriteBtn from '../../components/FavoriteBtn';
 import useInProgress from '../../hooks/useInProgress';
 import Alert from '../../components/Alert';
-
 import useLoading from '../../hooks/useLoading';
 import Loading from '../../components/Loading';
 import useRecipeDetails from '../../hooks/useRecipeDetails';
