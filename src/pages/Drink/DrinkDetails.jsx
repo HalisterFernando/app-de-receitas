@@ -111,7 +111,7 @@ export default function DrinkDetails() {
               <Recomendations type={ TYPE } />
             </div>
             <Link
-              to={ `/foods/${id}/in-progress` }
+              to={ `/drinks/${id}/in-progress` }
             >
               <button
                 className={
