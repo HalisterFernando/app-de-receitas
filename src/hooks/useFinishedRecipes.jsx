@@ -5,9 +5,10 @@ import { getItem, setItem } from '../services/localStorageServices';
 
 export default function useFinishedRecipes(recipeId, type) {
   const navigate = useNavigate();
+  const isTypeFoods = type === 'foods';
   const { finishedRecipes, setFinishedRecipes,
     currentRecipe: { ingredients },
-    inProgressRecipes: { meals } } = useContext(AppContext);
+    inProgressRecipes: { meals, cocktails } } = useContext(AppContext);
   const [isRecipeFinished, setIsRecipeFinished] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function useFinishedRecipes(recipeId, type) {
   }, [finishedRecipes]);
 
   const recipeToFinish = (recipe) => {
-    if (type === 'foods') {
+    if (isTypeFoods) {
       const { idMeal: id, strArea: nationality, strCategory: category,
         strMeal: name, strMealThumb: image, strTags: tags } = recipe;
 
@@ -62,8 +63,10 @@ export default function useFinishedRecipes(recipeId, type) {
   };
 
   const isReadyToFinish = () => {
-    console.log(ingredients?.length === meals[recipeId]?.length);
-    return ingredients?.length === meals[recipeId]?.length;
+    if (isTypeFoods) {
+      return ingredients?.length === meals[recipeId]?.length;
+    }
+    return ingredients?.length === cocktails[recipeId]?.length;
   };
 
   return { finishRecipe, isRecipeFinished, isReadyToFinish };
