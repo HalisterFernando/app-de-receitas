@@ -43,14 +43,14 @@ export default function Header() {
         className="
       rounded-full
       bg-white
-      w-48
+      w-52
       h-8
       shadow-sm
       shadow-black
       "
       >
         <h1
-          className="font-semibold text-2xl text-center"
+          className="font-semibold text-xl text-center"
           data-testid="page-title"
         >
           { headerTitles[pathname] }
