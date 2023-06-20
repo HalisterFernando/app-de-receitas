@@ -34,6 +34,7 @@ export default function IngredientCard({ name, image, index }) {
       shadow-md
       shadow-black
       rounded
+      bg-white
       p-2
       "
         data-testid={ `${index}-ingredient-card` }
