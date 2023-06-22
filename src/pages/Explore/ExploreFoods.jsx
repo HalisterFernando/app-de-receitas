@@ -12,7 +12,7 @@ export default function ExploreFoods() {
   const { surpriseMe, byIngredient } = useExplore(TYPE);
   const navigate = useNavigate();
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col bg-orange-200">
       <Header />
       <div className="flex flex-col justify-center gap-6 items-center h-full ">
         <button
