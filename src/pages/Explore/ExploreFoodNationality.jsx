@@ -11,7 +11,7 @@ export default function ExploreFoodNationality() {
   const { animateCard } = useCategoryFilters();
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col bg-orange-200">
       <Header />
       <NationalityOptions />
       <div

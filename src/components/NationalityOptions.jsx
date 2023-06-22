@@ -8,7 +8,7 @@ export default function NationalityOptions() {
 
   return (
     <select
-      className="p-1 bg-orange-200 text-lg m-3 h-10 rounded"
+      className="p-1 text-lg m-3 h-10 rounded"
       name="nationality"
       data-testid="explore-by-nationality-dropdown"
       onChange={ (ev) => handleNationality(ev) }
