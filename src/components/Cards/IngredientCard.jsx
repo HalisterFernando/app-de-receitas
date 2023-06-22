@@ -5,7 +5,7 @@ import { AppContext } from '../../context/Provider';
 import { fetchMealByIngredient } from '../../services/foodServices';
 import { fetchDrinkByIngredient } from '../../services/drinkServices';
 
-export default function IngredientCard({ name, image, index }) {
+export default function IngredientCard({ name, image, index, animate }) {
   const { setMeals, setDrinks } = useContext(AppContext);
   const isFoodsUrl = window.location.href.includes('foods');
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function IngredientCard({ name, image, index }) {
   return (
     <Link to="/foods" onClick={ navigateTo }>
       <div
-        className="
+        className={ `
       flex
       flex-col
       justify-center
@@ -36,7 +36,8 @@ export default function IngredientCard({ name, image, index }) {
       rounded
       bg-white
       p-2
-      "
+      ${animate && 'animate-slide-down'}
+      ` }
         data-testid={ `${index}-ingredient-card` }
       >
         <div>
@@ -45,7 +46,7 @@ export default function IngredientCard({ name, image, index }) {
         <div>
           <h2
             data-testid={ `${index}-card-name` }
-            className="text-xs"
+            className="text-xs font-semibold"
           >
             {name}
           </h2>
@@ -59,4 +60,5 @@ IngredientCard.propTypes = {
   name: propTypes.string.isRequired,
   image: propTypes.string.isRequired,
   index: propTypes.number.isRequired,
+  animate: propTypes.bool.isRequired,
 };

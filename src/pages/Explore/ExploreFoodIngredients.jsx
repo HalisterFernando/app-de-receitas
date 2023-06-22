@@ -4,12 +4,14 @@ import { AppContext } from '../../context/Provider';
 import IngredientCard from '../../components/Cards/IngredientCard';
 import useExplore from '../../hooks/useExplore';
 import Footer from '../../components/Footer';
+import useCategoryFilters from '../../hooks/useCategoryFilters';
 
 const IMAGE_URL = 'https://www.themealdb.com/images/ingredients/';
 
 export default function ExploreFoodIngredients() {
   const { allIngredients } = useContext(AppContext);
   useExplore();
+  const { animateCard } = useCategoryFilters();
 
   return (
     <div className="h-screen flex flex-col">
@@ -32,6 +34,7 @@ export default function ExploreFoodIngredients() {
             name={ strIngredient }
             image={ `${IMAGE_URL}${strIngredient}.png` }
             index={ index }
+            animate={ animateCard }
             key={ idIngredient }
           />
         ))}
