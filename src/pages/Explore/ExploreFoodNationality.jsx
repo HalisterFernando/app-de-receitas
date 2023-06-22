@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
 import Header from '../../components/Header';
-import NationatyOptions from '../../components/NationatyOptions';
+import NationalityOptions from '../../components/NationalityOptions';
 import RecipeCard from '../../components/Cards/RecipeCard';
 import { AppContext } from '../../context/Provider';
+import useCategoryFilters from '../../hooks/useCategoryFilters';
 
 export default function ExploreFoodNationality() {
   const { meals } = useContext(AppContext);
+  const { animateCard } = useCategoryFilters();
 
   return (
     <div className="h-screen flex flex-col">
       <Header />
-      <NationatyOptions />
+      <NationalityOptions />
       <div
         className="
       flex
@@ -30,6 +32,7 @@ export default function ExploreFoodNationality() {
             image={ strMealThumb }
             name={ strMeal }
             id={ idMeal }
+            animate={ animateCard }
           />
         ))}
       </div>

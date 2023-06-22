@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import useNationalities from '../hooks/useNationalities';
 import { AppContext } from '../context/Provider';
 
-export default function NationatyOptions() {
+export default function NationalityOptions() {
   const { handleNationality } = useNationalities();
   const { nationalities } = useContext(AppContext);
 
   return (
     <select
-      className="p-1 bg-orange-200 text-lg mx-2 h-10 rounded"
+      className="p-1 bg-orange-200 text-lg m-3 h-10 rounded"
       name="nationality"
       data-testid="explore-by-nationality-dropdown"
       onChange={ (ev) => handleNationality(ev) }
