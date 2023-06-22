@@ -4,6 +4,7 @@ import NationalityOptions from '../../components/NationalityOptions';
 import RecipeCard from '../../components/Cards/RecipeCard';
 import { AppContext } from '../../context/Provider';
 import useCategoryFilters from '../../hooks/useCategoryFilters';
+import Footer from '../../components/Footer';
 
 export default function ExploreFoodNationality() {
   const { meals } = useContext(AppContext);
@@ -36,6 +37,7 @@ export default function ExploreFoodNationality() {
           />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
