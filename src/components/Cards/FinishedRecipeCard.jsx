@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 import propTypes from 'prop-types';
-import clipboardCopy from 'clipboard-copy';
 import Tag from './Tag';
 import ShareBtn from '../ShareBtn';
-import useTimeOut from '../../hooks/useTimeout';
 import Alert from '../Alert';
+import useShare from '../../hooks/useShare';
 
 export default function FinishedRecipeCard(
   { id, name, image, category, nationality = null,
@@ -16,12 +15,7 @@ export default function FinishedRecipeCard(
   const linkTo = type === 'meal' ? `/foods/${id}` : `/drinks/${id}`;
   const currentDate = format(new Date(), 'dd/MM/yyyy');
 
-  const { show, timeOut } = useTimeOut();
-
-  const handleShare = () => {
-    clipboardCopy(`http://localhost:3000${linkTo}`);
-    timeOut();
-  };
+  const { handleShare, show } = useShare();
 
   return (
     <div
