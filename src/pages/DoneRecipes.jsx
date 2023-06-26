@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import FinishedRecipeCard from '../components/Cards/FinishedRecipeCard';
 import MealAndDrinkFilter from '../components/MealAndDrinkFilter';
 import useDoneRecipes from '../hooks/useDoneRecipes';
+import Footer from '../components/Footer';
 
 export default function DoneRecipes() {
   const { recipesToRender, setFilter } = useDoneRecipes();
@@ -27,6 +28,7 @@ export default function DoneRecipes() {
           />
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
