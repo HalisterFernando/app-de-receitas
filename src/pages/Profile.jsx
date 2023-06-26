@@ -1,29 +1,13 @@
-import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AppContext } from '../context/Provider';
-import { getItem, removeItem } from '../services/localStorageServices';
+
+import useProfile from '../hooks/useProfile';
 
 export default function Profile() {
-  const navigate = useNavigate();
-  const { userEmail, setUserEmail } = useContext(AppContext);
-
-  useEffect(() => {
-    const user = getItem('user');
-    if (user) {
-      setUserEmail(user);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    const localStorageKeys = ['user', 'allIngredients', 'favoriteRecipes', 'mealsToken',
-      'cocktailsToken', 'inProgressRecipes', 'doneRecipes'];
-
-    localStorageKeys.forEach((key) => removeItem(key));
-    navigate('/');
-    window.location.reload();
-  };
+  const { userEmail } = useContext(AppContext);
+  const { handleLogout } = useProfile();
 
   return (
     <div className="flex flex-col h-screen">
