@@ -1,26 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import FinishedRecipeCard from '../components/Cards/FinishedRecipeCard';
-import { AppContext } from '../context/Provider';
-import useFinishedRecipes from '../hooks/useFinishedRecipes';
 import MealAndDrinkFilter from '../components/MealAndDrinkFilter';
+import useDoneRecipes from '../hooks/useDoneRecipes';
 
 export default function DoneRecipes() {
-  const { finishedRecipes } = useContext(AppContext);
-  const [filter, setFilter] = useState('All');
-  useFinishedRecipes();
-
-  const filtersForFinishedRecipes = {
-    Food: (arr) => arr.filter(({ type }) => type === 'meal'),
-    Drinks: (arr) => arr.filter(({ type }) => type === 'cocktail'),
-    All: (arr) => arr,
-  };
-
-  const recipesToRender = () => {
-    const recipes = [...finishedRecipes];
-    const filteredValues = filtersForFinishedRecipes[filter](recipes);
-    return filteredValues;
-  };
+  const { recipesToRender, setFilter } = useDoneRecipes();
 
   return (
     <div className="h-screen flex flex-col">
