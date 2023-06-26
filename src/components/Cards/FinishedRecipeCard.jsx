@@ -34,6 +34,7 @@ export default function FinishedRecipeCard(
         rounded
         shadow-md
         shadow-black
+        bg-white
         "
     >
       <div className="h-36 w-1/2">

@@ -8,7 +8,7 @@ export default function DoneRecipes() {
   const { recipesToRender, setFilter } = useDoneRecipes();
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col bg-orange-200">
       <Header />
       <MealAndDrinkFilter filter={ setFilter } />
       <div className="flex flex-col gap-4 items-center h-full mt-2 overflow-y-scroll">
