@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AppContext } from '../context/Provider';
@@ -6,11 +7,12 @@ import { AppContext } from '../context/Provider';
 import useProfile from '../hooks/useProfile';
 
 export default function Profile() {
+  const navigate = useNavigate();
   const { userEmail } = useContext(AppContext);
   const { handleLogout } = useProfile();
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-orange-200">
       <Header />
       <div
         className="
@@ -25,14 +27,32 @@ export default function Profile() {
       >
         <h2 data-testid="profile-email">{userEmail}</h2>
         <button
-          className="w-72 h-14 text-center shadow-md shadow-black bg-orange-400 rounded"
+          className="
+          w-72
+          h-14
+          text-center
+          shadow-md
+          shadow-black
+          bg-orange-400
+          rounded
+          font-semibold
+          "
           data-testid="profile-done-btn"
           onClick={ () => navigate('/done-recipes') }
         >
           Done Recipes
         </button>
         <button
-          className="w-72 h-14 text-center shadow-md shadow-black bg-orange-400 rounded"
+          className="
+             w-72
+             h-14
+             text-center
+             shadow-md
+             shadow-black
+             bg-orange-400
+             rounded
+             font-semibold
+             "
           data-testid="filter-by-food-btn"
           name="Food"
           onClick={ () => navigate('/favorite-recipes') }
@@ -40,7 +60,16 @@ export default function Profile() {
           Favorite Recipes
         </button>
         <button
-          className="w-72 h-14 text-center shadow-md shadow-black bg-orange-400 rounded"
+          className="
+             w-72
+             h-14
+             text-center
+             shadow-md
+             shadow-black
+             bg-orange-400
+             rounded
+             font-semibold
+             "
           data-testid="profile-logout-btn"
           name="Drinks"
           onClick={ () => handleLogout() }
