@@ -32,7 +32,7 @@ function SearchBar({ type, animateCard }) {
         <button
           className="
           mx-auto
-          w-16
+          w-28
           block
           bg-orange-400
           rounded-full
