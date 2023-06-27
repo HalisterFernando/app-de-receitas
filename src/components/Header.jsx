@@ -60,20 +60,23 @@ export default function Header() {
 
       {checkPath() ? (
         <button
-          className="
+          className={ `
       rounded-full
       h-9
       w-9
-      bg-white
+      
       shadow-sm
       shadow-black
-      "
+      ${toggleSearchBar ? 'bg-black' : 'bg-white'}
+      ` }
           onClick={ () => setToggleSearchBar(!toggleSearchBar) }
           type="button"
         >
           <BsSearch
             data-testid="search-top-btn"
-            className="text-2xl block mx-auto"
+            className={
+              `text-2xl block mx-auto ${toggleSearchBar ? 'text-white' : 'text-black'}`
+            }
           />
         </button>
       ) : (
