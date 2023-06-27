@@ -12,7 +12,7 @@ export default function CategoryFilters(
   const { loading } = useLoading();
 
   return !loading && (
-    <div className="overflow-x-scroll md:overflow-x-visible px-1">
+    <div className="overflow-x-scroll lg:overflow-x-visible px-1">
       <div className="flex md:justify-center min-w-min gap-3 my-2">
         <button
           type="button"
@@ -25,7 +25,7 @@ export default function CategoryFilters(
           h-7
           p-1
           w-24
-          md:w-32
+          lg:w-32
           text-xs
           truncate
           ` }
@@ -49,7 +49,7 @@ export default function CategoryFilters(
             h-7
             p-1
             w-24
-            md:w-32
+            lg:w-32
             text-xs
             truncate
             ` }
