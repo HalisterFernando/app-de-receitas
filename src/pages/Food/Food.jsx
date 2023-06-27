@@ -36,6 +36,10 @@ export default function Food() {
         <div
           className="flex
         flex-col
+        md:flex-row
+        md:flex-wrap
+        md:justify-center
+        md:gap-10
         items-center
         gap-2
         mt-2

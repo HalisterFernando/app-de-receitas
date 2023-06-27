@@ -36,6 +36,10 @@ export default function Drink() {
           className="
         flex
         flex-col
+        md:flex-row
+        md:flex-wrap
+        md:justify-center
+        md:gap-10
         items-center
         h-full
         gap-2
