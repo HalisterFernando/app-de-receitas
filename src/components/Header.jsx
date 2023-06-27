@@ -16,7 +16,8 @@ export default function Header() {
     flex
     justify-between
     items-center
-    p-1
+    py-1
+    px-2
     bg-gradient-to-b
     from-orange-400
     to-orange-200
