@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 export default function SearchBarFilters({ setValue }) {
   return (
-    <div className="flex justify-between mx-2">
+    <div className="flex justify-between md:justify-center md:gap-3 mx-2">
       <div>
         <label htmlFor="ingredient-search-radio" className="text-sm">
           <input
