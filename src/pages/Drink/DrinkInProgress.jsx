@@ -30,13 +30,23 @@ export default function DrinkInProgress() {
   return (
     <div className="flex flex-col h-screen bg-orange-200">
       {loading ? <Loading /> : (
-        <main className="overflow-y-scroll animate-slide-up">
+        <main className="overflow-y-scroll animate-slide-up relative">
           <div>
             <img
-              className="food-image"
               data-testid="recipe-photo"
               src={ recipe.strDrinkThumb }
               alt="Foto da Receita"
+              className="
+              lg:h-[450px]
+              lg:w-[500px]
+              lg:top-8
+              md:h-[350px]
+              md:w-[400px]
+              md:absolute
+              md:left-1/3
+              md:top-16
+              md:rounded
+              "
             />
           </div>
           <div className="p-2 m-2 bg-white rounded-xl">
@@ -71,7 +81,7 @@ export default function DrinkInProgress() {
               { `Category - ${recipe.strCategory}` }
             </h4>
             <h3 className="font-semibold my-2 text-orange-600">Ingredients</h3>
-            <div className="flex flex-col gap-1 p-2">
+            <div className="flex flex-col gap-1 p-2 md:min-h-[350px]">
               {ingredients.map((ingredient, idx) => (
                 <label
                   data-testid={ `${idx}-ingredient-step` }
