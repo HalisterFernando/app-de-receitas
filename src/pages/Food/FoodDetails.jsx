@@ -29,11 +29,22 @@ export default function FoodDetails() {
     <div className="flex flex-col h-screen bg-orange-200">
       {
         loading ? <Loading /> : (
-          <div className="overflow-y-scroll animate-slide-up">
+          <div className="overflow-y-scroll animate-slide-up relative">
             <img
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
               data-testid="recipe-photo"
+              className="
+              lg:h-[450px]
+              lg:w-[500px]
+              md:h-[350px]
+              md:w-[400px]
+              md:absolute
+              md:left-1/3
+              lg:top-8
+              md:top-16
+              md:rounded
+              "
             />
             <div className="p-2 m-2 bg-white rounded-xl">
               <div
@@ -68,7 +79,7 @@ export default function FoodDetails() {
                 { `Category - ${recipe.strCategory}` }
               </h4>
               <h3 className="font-semibold my-2 text-orange-600">Ingredients</h3>
-              <ul className="list-disc pl-5 marker:text-orange-600">
+              <ul className="list-disc pl-5 marker:text-orange-600 md:min-h-[350px]">
                 {ingredients.map((ingredient, index) => (
                   <li
                     className="my-1"
@@ -87,7 +98,7 @@ export default function FoodDetails() {
               </p>
             </div>
             <iframe
-              className="w-[300px] h-72 mx-auto"
+              className="w-[300px] md:w-[700px] h-72 md:h-[500px] mx-auto"
               src={ convertUrlToEmbed(recipe.strYoutube) }
               title="YouTube video player"
               allow="

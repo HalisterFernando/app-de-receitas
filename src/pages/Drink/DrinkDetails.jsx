@@ -30,11 +30,22 @@ export default function DrinkDetails() {
     <div className="flex flex-col h-screen bg-orange-200">
       {
         loading ? <Loading /> : (
-          <div className="overflow-y-scroll animate-slide-up">
+          <div className="overflow-y-scroll animate-slide-up relative">
             <img
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }
               data-testid="recipe-photo"
+              className="
+              lg:h-[450px]
+              lg:w-[500px]
+              md:h-[350px]
+              md:w-[400px]
+              md:absolute
+              md:left-1/3
+              lg:top-8
+              md:top-16
+              md:rounded
+              "
             />
             <div className="p-2 m-2 bg-white rounded-xl">
               <div
@@ -69,7 +80,7 @@ export default function DrinkDetails() {
                 { `Category - ${recipe.strCategory}` }
               </h4>
               <h3 className="font-semibold my-2 text-orange-600">Ingredients</h3>
-              <ul className="list-disc pl-4 marker:text-orange-600">
+              <ul className="list-disc pl-4 marker:text-orange-600 md:min-h-[350px]">
                 {ingredients.map((ingredient, index) => (
                   <li
                     className="text-sm my-1"
