@@ -24,14 +24,15 @@ export default function Header() {
     "
     >
       <button
-        className="
+        className={ `
         rounded-full
         h-9
         w-9
-        bg-white
         shadow-sm
         shadow-black
-      "
+        ${pathname === '/profile' ? 'bg-black text-white' : 'bg-white text-black'}
+
+        ` }
         type="button"
         onClick={ () => navigate('/profile') }
       >
