@@ -26,7 +26,21 @@ export default function FavoriteRecipes() {
     <div className="h-screen flex flex-col">
       <Header />
       <MealAndDrinkFilter filter={ setFilter } />
-      <div className="flex flex-col gap-4 items-center h-full mt-2 overflow-y-scroll ">
+      <div
+        className="
+      flex
+      flex-col
+      md:flex-row
+      md:gap-10
+      md:justify-center
+      md:flex-wrap
+      gap-4
+      items-center
+      h-full
+      mt-2
+      overflow-y-scroll
+      "
+      >
         {recipesToRender().map((recipe, index) => (
           <FavoriteRecipeCard
             id={ recipe.id }
