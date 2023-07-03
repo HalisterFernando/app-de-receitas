@@ -20,6 +20,7 @@ export default function ExploreFoodNationality() {
       flex-wrap
       justify-center
       gap-2
+      md:gap-10
       items-center
       h-full
       overflow-y-scroll
