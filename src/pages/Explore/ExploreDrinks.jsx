@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineOrderedList, AiOutlineQuestionCircle } from 'react-icons/ai';
 import Header from '../../components/Header';
 import useExplore from '../../hooks/useExplore';
 import Footer from '../../components/Footer';
@@ -30,7 +31,9 @@ export default function ExploreDrinks() {
           data-testid="explore-by-ingredient"
           onClick={ () => byIngredient() }
         >
+          <AiOutlineOrderedList className="text-3xl" />
           By Ingredient
+          <AiOutlineOrderedList className="text-3xl" />
         </button>
         <button
           type="button"
@@ -51,7 +54,9 @@ export default function ExploreDrinks() {
           data-testid="explore-surprise"
           onClick={ () => surpriseMe() }
         >
+          <AiOutlineQuestionCircle className="text-3xl" />
           Surprise me!
+          <AiOutlineQuestionCircle className="text-3xl" />
         </button>
       </div>
       <Footer />
