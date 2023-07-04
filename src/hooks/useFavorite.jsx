@@ -5,6 +5,7 @@ import { getItem, setItem } from '../services/localStorageServices';
 export default function useFavorite(recipeId) {
   const { favoriteRecipes, setFavoriteRecipes } = useContext(AppContext);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     const favorites = getItem('favoriteRecipes');
@@ -12,6 +13,18 @@ export default function useFavorite(recipeId) {
       setFavoriteRecipes(favorites);
     }
   }, []);
+
+  const filtersForFavoriteRecipes = {
+    Food: (arr) => arr.filter(({ type }) => type === 'meal'),
+    Drinks: (arr) => arr.filter(({ type }) => type === 'cocktail'),
+    All: (arr) => arr,
+  };
+
+  const recipesToRender = () => {
+    const recipes = [...favoriteRecipes];
+    const filteredValues = filtersForFavoriteRecipes[filter](recipes);
+    return filteredValues;
+  };
 
   useEffect(() => {
     setIsFavorite(favoriteRecipes.some((recipe) => recipe.id === recipeId));
@@ -60,5 +73,12 @@ export default function useFavorite(recipeId) {
     setItem('favoriteRecipes', updatedFavorites);
   };
 
-  return { addFavoriteRecipe, removeFavoriteRecipe, recipeToFavorite, isFavorite };
+  return {
+    addFavoriteRecipe,
+    removeFavoriteRecipe,
+    recipeToFavorite,
+    isFavorite,
+    setFilter,
+    recipesToRender,
+  };
 }

@@ -1,26 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import MealAndDrinkFilter from '../components/MealAndDrinkFilter';
-import { AppContext } from '../context/Provider';
 import useFavorite from '../hooks/useFavorite';
 import FavoriteRecipeCard from '../components/Cards/FavoriteRecipeCard';
 
 export default function FavoriteRecipes() {
-  const { favoriteRecipes } = useContext(AppContext);
-  const { removeFavoriteRecipe } = useFavorite();
-  const [filter, setFilter] = useState('All');
-
-  const filtersForFavoriteRecipes = {
-    Food: (arr) => arr.filter(({ type }) => type === 'meal'),
-    Drinks: (arr) => arr.filter(({ type }) => type === 'cocktail'),
-    All: (arr) => arr,
-  };
-
-  const recipesToRender = () => {
-    const recipes = [...favoriteRecipes];
-    const filteredValues = filtersForFavoriteRecipes[filter](recipes);
-    return filteredValues;
-  };
+  const { removeFavoriteRecipe, setFilter, recipesToRender } = useFavorite();
 
   return (
     <div className="h-screen flex flex-col">
