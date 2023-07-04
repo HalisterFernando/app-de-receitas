@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import clipboardCopy from 'clipboard-copy';
 import ShareBtn from '../ShareBtn';
-import useTimeOut from '../../hooks/useTimeout';
+import useShare from '../../hooks/useShare';
 import Alert from '../Alert';
 import FavoriteBtn from '../FavoriteBtn';
 
@@ -13,14 +12,9 @@ export default function FavoriteRecipeCard(
 
 ) {
   const linkTo = type === 'meal' ? `/foods/${id}` : `/drinks/${id}`;
-  const { show, timeOut } = useTimeOut();
+  const { handleShare, show } = useShare();
   const recipe = { id, name, image, category, nationality, alcoholic, type, index };
   const recipeType = type === 'meal' ? 'foods' : 'drinks';
-
-  const handleShare = () => {
-    clipboardCopy(`http://localhost:3000${linkTo}`);
-    timeOut();
-  };
 
   return (
     <div
