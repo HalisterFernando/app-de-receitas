@@ -10,16 +10,24 @@ Na época, contribui com a estilização do projeto, com os custom hooks para re
 
 ## Descrição / Utilizando o app :mag_right:
 
-Este é um app de receitas, após realizar o login com e-mail e senha, o usuário poderá escolher uma receita sendo de comida ou bebida.
+Este é um app de receitas onde realizando o login com e-mail e senha, o usuário poderá escolher uma receita sendo de comida ou bebida.
 
-Ao escolher uma receita, e clicar em "Start Recipe", será redirecionado para uma página onde pode acompanhar o progresso da receita marcando os ingredientes utilizados. 
+Ao escolher uma receita e clicar em "Start Recipe", será redirecionado para uma página onde é possível acompanhar o progresso da receita marcando os ingredientes conforme forem sendo utilizados. 
 
 Tendo marcado todos os ingredientes, poderá clicar em "Finish Recipe" e então a receita será listada na página de receitas feitas.
 
 O usuário também pode favoritar uma receita e ter acesso a página de receitas favoritadas.
 
+## Exemplo do layout mobile :iphone:
+
+![Foods](https://github.com/HalisterFernando/app-de-receitas/blob/main/src/assets/foods-sm.png) ![Recipe](https://github.com/HalisterFernando/app-de-receitas/blob/main/src/assets/recipe-sm.png)
+
+## Exemplo do layout web 🖥️
+
+![Foods](https://github.com/HalisterFernando/app-de-receitas/blob/main/src/assets/foods-lg.png) ![Recipe](https://github.com/HalisterFernando/app-de-receitas/blob/main/src/assets/recipe-lg.png)
 
 ## Tecnologias utilizadas :computer:
+
 
 ### Front-end
 
