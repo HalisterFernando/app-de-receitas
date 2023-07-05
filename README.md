@@ -1,4 +1,6 @@
 # Du Cheff - Food & Drink :spaghetti:
+[![Static Badge](https://img.shields.io/badge/Licence-MIT-orange)](https://github.com/HalisterFernando/app-de-receitas/blob/main/LICENSE)
+
 
 Este projeto foi realizado no módulo de **Front-end** da [Trybe](https://www.betrybe.com/?utm_source=trybe.com.br), o código foi refatorado com a finalidade de estudar mais sobre custom hooks e gerenciamento de estado usando React, assim como também testes no front-end e desenvolvimento mobile first. 
 
