@@ -2,7 +2,7 @@
 [![Static Badge](https://img.shields.io/badge/Licence-MIT-orange)](https://github.com/HalisterFernando/app-de-receitas/blob/main/LICENSE)
 
 
-Este projeto foi realizado no módulo de **Front-end** da [Trybe](https://www.betrybe.com/?utm_source=trybe.com.br), o código foi refatorado com a finalidade de estudar mais sobre custom hooks e gerenciamento de estado usando React, assim como também testes no front-end e desenvolvimento mobile first. 
+Este projeto é um app de receitas realizado no módulo de **Front-end** da [Trybe](https://www.betrybe.com/?utm_source=trybe.com.br), o código foi refatorado com a finalidade de estudar mais sobre custom hooks e gerenciamento de estado usando React, assim como também testes no front-end e desenvolvimento mobile first. 
 
 Este projeto na época foi realizado em grupo utilizando metodologias ágeis durante o desenvolvimento, o grupo era composto por [Juliana Oliveira](https://github.com/jsfoliveira), [Alector Alexandre](https://github.com/AlectorAlexander), [Kelvin Lucas](https://github.com/klaolp), [Vinicius Alves](https://github.com/ViniiAlves)
 
@@ -36,6 +36,10 @@ O usuário também pode favoritar uma receita e ter acesso a página de receitas
 * Axios
 * Date fns
 * Vitest
+
+### APIs
+* [The Meal DB](https://www.themealdb.com/)
+* [The Cocktail DB](https://www.thecocktaildb.com/)
 
 ## Próximos passos :hammer:
 
