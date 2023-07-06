@@ -57,13 +57,13 @@ npm install
 npm run dev
 ```
 ## Rodando via Docker :whale:
-### Subir o container :point_up:
+### Subir o container ⬆️
 ```bash
-npm run compose⬆️
+npm run compose:up
 ``` 
-### Descendo o container :point_down:
+### Descendo o container ⬇️
 ```bash
-npm run compose⬇️ 
+npm run compose:down 
 ```
 
 
