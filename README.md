@@ -10,6 +10,8 @@ Na época, contribui com a estilização do projeto, com os custom hooks para re
 
 ## Descrição / Utilizando o app :mag_right:
 
+[Du Cheff](https://ducheff.vercel.app/) - clique para conferir o projeto!
+
 Este é um app de receitas onde realizando o login com e-mail e senha, o usuário poderá escolher uma receita sendo de comida ou bebida.
 
 Ao escolher uma receita e clicar em "Start Recipe", será redirecionado para uma página onde é possível acompanhar o progresso da receita marcando os ingredientes conforme forem sendo utilizados. 
