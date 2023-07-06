@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { fetchDrinks } from '../services/drinkServices';
 import { fetchMeals } from '../services/foodServices';
-import RecipeCard from './Cards/RecipeCard';
 import useLoading from '../hooks/useLoading';
+import RecomendationCard from './Cards/RecomendationCard';
 
 const INDEX = 7;
 
@@ -39,7 +39,8 @@ export default function Recomendations({ type }) {
               key={ type === 'drinks' ? recipe.strMeal : recipe.strDrink }
               data-testid={ `${index}-recomendation-card` }
             >
-              <RecipeCard
+              <RecomendationCard
+                type={ type === 'foods' ? 'drinks' : 'foods' }
                 index={ index }
                 image={ type === 'drinks' ? recipe.strMealThumb : recipe.strDrinkThumb }
                 name={ type === 'drinks' ? recipe.strMeal : recipe.strDrink }
