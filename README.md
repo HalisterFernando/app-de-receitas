@@ -45,21 +45,23 @@ O usuário também pode favoritar uma receita e ter acesso a página de receitas
 
 * Seguir implementando testes de integração com o Vitest e um teste e2e utilizando Cypress
 
-## Instalando Dependências e Iniciando a Aplicação
-### Você precisa ter node 18 para rodar direto na máquina :warning:
+## Instalando dependências e iniciando a aplicação
+### Você precisa ter node 18 ou maior para rodar direto na máquina :warning:
 
 ```bash
-cd Classicar/npm install
-npm start
+git clone https://github.com/HalisterFernando/app-de-receitas.git
+cd app-de-receitas
+npm install
+npm run dev
 ```
 ## Rodando via Docker :whale:
 ### Subir o container :point_up:
 ```bash
-npm run compose:up 
+npm run compose⬆️
 ``` 
 ### Descendo o container :point_down:
 ```bash
-npm run compose:up 
+npm run compose⬇️ 
 ```
 
 
