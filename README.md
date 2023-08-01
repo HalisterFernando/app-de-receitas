@@ -10,6 +10,8 @@ Na época, contribui com a estilização do projeto, com os custom hooks para re
 
 ## Descrição / Utilizando o app :mag_right:
 
+[Du Cheff](https://ducheff.vercel.app/) - clique para conferir o projeto!
+
 Este é um app de receitas onde realizando o login com e-mail e senha, o usuário poderá escolher uma receita sendo de comida ou bebida.
 
 Ao escolher uma receita e clicar em "Start Recipe", será redirecionado para uma página onde é possível acompanhar o progresso da receita marcando os ingredientes conforme forem sendo utilizados. 
@@ -45,21 +47,23 @@ O usuário também pode favoritar uma receita e ter acesso a página de receitas
 
 * Seguir implementando testes de integração com o Vitest e um teste e2e utilizando Cypress
 
-## Instalando Dependências e Iniciando a Aplicação
-### Você precisa ter node 18 para rodar direto na máquina :warning:
+## Instalando dependências e iniciando a aplicação
+### Você precisa ter node 18 ou maior para rodar direto na máquina :warning:
 
 ```bash
-cd Classicar/npm install
-npm start
+git clone https://github.com/HalisterFernando/app-de-receitas.git
+cd app-de-receitas
+npm install
+npm run dev
 ```
 ## Rodando via Docker :whale:
-### Subir o container :point_up:
+### Subir o container ⬆️
 ```bash
-npm run compose:up 
+npm run compose:up
 ``` 
-### Descendo o container :point_down:
+### Descendo o container ⬇️
 ```bash
-npm run compose:up 
+npm run compose:down 
 ```
 
 
