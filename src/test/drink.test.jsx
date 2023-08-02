@@ -4,7 +4,7 @@ import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 
-describe('Food test suites', () => {
+describe('Drink test suites', () => {
     beforeEach(() => {
       renderWithRouter(<App />, { route: '/drinks'})
     })
