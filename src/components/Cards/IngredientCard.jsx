@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import propTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../context/Provider';
 import { fetchMealByIngredient } from '../../services/foodServices';
 import { fetchDrinkByIngredient } from '../../services/drinkServices';
@@ -23,7 +23,7 @@ export default function IngredientCard({ name, image, index, animate }) {
   };
 
   return (
-    <Link to="/foods" onClick={ navigateTo }>
+    <button onClick={ navigateTo }>
       <div
         className={ `
       flex
@@ -52,7 +52,7 @@ export default function IngredientCard({ name, image, index, animate }) {
           </h2>
         </div>
       </div>
-    </Link>
+    </button>
   );
 }
 
